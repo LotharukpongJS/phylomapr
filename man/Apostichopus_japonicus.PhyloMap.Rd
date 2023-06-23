@@ -7,7 +7,7 @@
 \format{
 A tibble with 30,032 rows and 2 variables:
 \describe{
-\item{Phylostratum}{dbl Year price was recorded}
+\item{Phylostratum}{dbl Phylostratum (or gene age) assignment}
 \item{GeneID}{chr GeneID annotation from UniProt}
 }
 }
