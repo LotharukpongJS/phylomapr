@@ -50,7 +50,7 @@ Format:
 
      A tibble with 30,032 rows and 2 variables:
 
-     Phylostratum dbl Year price was recorded
+     Phylostratum dbl Phylostratum (or gene age) assignment
 
      GeneID chr GeneID annotation from UniProt
 
