@@ -86,8 +86,10 @@ Aj.PES <- myTAI::MatchMap(Aj.map, Aj.ExpressionMatrix, remove.duplicates = FALSE
 ```
 And test the hourglass on the simulated data.
 ```
-myTAI::PlotSignature(tidyr::drop_na(PES))
+myTAI::PlotSignature(tidyr::drop_na(Aj.PES))
 ```
+![Rplots](https://github.com/LotharukpongJS/phylomapr/assets/80110649/6a12b5ea-abb8-4ee0-9379-4c3a90f5991c)
+
 
 ## Citation
 Citations are provided in the data description. Just put a `?` in front of the dataset.
