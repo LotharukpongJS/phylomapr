@@ -1,5 +1,5 @@
 # `phylomapr`
-`phylomapr` is an R data package. `phylomapr` enables quick retrieval of precomputed gene age maps (phylomaps).
+`phylomapr` is an R data package that enables quick retrieval of precomputed gene age maps (phylomaps).
 
 ## Installation
 ```r
