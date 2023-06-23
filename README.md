@@ -34,4 +34,7 @@ Also, get the data description
 ```
 
 ## Citation
-Citations are provided in the data description. Just put a `?` in front of the dataset, e.g. `?Apostichopus_japonicus.PhyloMap`.
+Citations are provided in the data description. Just put a `?` in front of the dataset, e.g. 
+```r
+?Apostichopus_japonicus.PhyloMap
+```
