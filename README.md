@@ -6,7 +6,7 @@
 devtools::install_github("LotharukpongJS/phylomapr")
 ```
 
-## Use cases
+## Use Cases
 Load the `phylomap` of _Apostichopus japonicus_ generated using the [GenEra](https://github.com/josuebarrera/GenEra)https://github.com/josuebarrera/GenEra.
 ```r
 Apostichopus_japonicus.PhyloMap
