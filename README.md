@@ -2,7 +2,7 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FLotharukpongJS%2Fphylomapr&label=Visitors&countColor=%23263759&style=flat)
 
-`phylomapr` enables quick retrieval of precomputed gene age maps (phylomaps) in R. Gene age maps loaded from `phylomapr` integrate seamlessly with [`myTAI`](https://github.com/drostlab/myTAI).
+Gene founder events facilitate evolutionary innovations. `phylomapr` enables quick retrieval of precomputed gene age maps (phylomaps) in R. Gene age maps loaded from `phylomapr` integrate _seamlessly_ with [`myTAI`](https://github.com/drostlab/myTAI).
 
 ## Installation
 ```r
@@ -60,7 +60,7 @@ Source:
      <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z>
 ```
 ### Loading gene age maps into myTAI
-[`myTAI`](https://github.com/drostlab/myTAI) facilitates evolutionary transcriptomic studies. Gene age maps retrieved from `phylomapr` integrate seamlessly into `myTAI`.
+[`myTAI`](https://github.com/drostlab/myTAI) facilitates evolutionary transcriptomic studies. Gene age maps retrieved from `phylomapr` integrate _seamlessly_ into `myTAI`.
 
 ```r
 Aj.map <- phylomapr::Apostichopus_japonicus.PhyloMap
