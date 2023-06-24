@@ -76,9 +76,9 @@ set.seed(123)
 # Create a data frame with the count table
 Aj.ExpressionMatrix <- tibble::tibble(
   GeneID = Aj.map$GeneID,
-  `24H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 5, sdlog = 0.5),
-  `48H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 5, sdlog = 0.5),
-  `72H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 5, sdlog = 0.5)
+  `24H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 3, sdlog = 1),
+  `48H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 3, sdlog = 1),
+  `72H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 3, sdlog = 1)
 )
 ```
 ```r
@@ -88,7 +88,25 @@ And test the hourglass on the simulated data.
 ```
 myTAI::PlotSignature(tidyr::drop_na(Aj.PES))
 ```
-![Rplots](https://github.com/LotharukpongJS/phylomapr/assets/80110649/6a12b5ea-abb8-4ee0-9379-4c3a90f5991c)
+![Rplot2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/29c1866f-9abc-4657-bf6a-013570053090)
+
+Users can also apply the transformation function of `myTAI (version > 1.0.1.0000)`.
+```r
+Aj.PES.log2 <- myTAI::tf(tidyr::drop_na(Aj.PES),FUN = log2, pseudocount = 1)
+hist(Aj.PES.log2$`24H`)
+```
+![Rplot_log2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/1c5ed279-2a13-48a9-af62-f2709ee16fda)
+
+Compare this to the distribution of raw abundance (TPM).
+```r
+hist(Aj.PES$`24H`, breaks = 200)
+```
+![Rplot_TPM](https://github.com/LotharukpongJS/phylomapr/assets/80110649/a29b15a7-c269-427a-9848-acba6b56af9e)
+
+```r
+myTAI::PlotSignature(tidyr::drop_na(Aj.PES.log2))
+```
+![Rplot_TAI_log2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/144d0c68-54f8-4af2-be46-539f37fc5211)
 
 
 ## Citation
