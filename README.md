@@ -11,12 +11,15 @@ devtools::install_github("LotharukpongJS/phylomapr")
 
 ## Use Cases
 
+### Retrieve gene age maps using `phylomapr`
 Load the `phylomap` of _Apostichopus japonicus_ (Japanese sea cucumber) generated using the [GenEra](https://github.com/josuebarrera/GenEra).
 ```r
+# either
 Aj.map <- phylomapr::Apostichopus_japonicus.PhyloMap
-# or
+# or alternatively
 library(phylomapr)
 Aj.map <- Apostichopus_japonicus.PhyloMap
+
 head(Aj.map)
 ```
 ```
@@ -28,7 +31,7 @@ head(Aj.map)
 5            1 tr|A0A1B2ZDN7|A0A1B2ZDN7_STIJA
 6            2 tr|A0A1X9J403|A0A1X9J403_STIJA
 ```
-Also, get the data description.
+To get the data description.
 ```r
 ?Apostichopus_japonicus.PhyloMap
 ```
@@ -59,14 +62,20 @@ Source:
 
      <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z>
 ```
-### Loading gene age maps into myTAI
-[`myTAI`](https://github.com/drostlab/myTAI) facilitates evolutionary transcriptomic studies. Gene age maps retrieved from `phylomapr` integrate _seamlessly_ into `myTAI`.
+### Loading gene age maps into `myTAI`
+[`myTAI`](https://github.com/drostlab/myTAI) facilitates evolutionary transcriptomic studies.
+Below are some ways in which gene age maps retrieved via `phylomapr` can be integrate _seamlessly_ into `myTAI`.
+
+#### Plot the developmental hourglass (on simulated gene expression data)
+using simulated developmental gene expression of _Apostichopus japonicus_ (Japanese sea cucumber).
+<details>
+  <summary>Click to see how</summary>
 
 ```r
 Aj.map <- phylomapr::Apostichopus_japonicus.PhyloMap
 ```
 
-Here we simulate developmental gene expression of _Apostichopus japonicus_ (Japanese sea cucumber).
+Simulate developmental gene expression.
 
 ```r
 # Set the random seed for reproducibility
@@ -90,7 +99,13 @@ myTAI::PlotSignature(tidyr::drop_na(Aj.PES))
 ```
 ![Rplot2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/29c1866f-9abc-4657-bf6a-013570053090)
 
-Users can also apply the transformation function of `myTAI (version > 1.0.1.0000)`.
+</details>
+
+#### Next, transform the simulated gene expression data
+<details>
+  <summary>Click to see how</summary>
+
+Note: this requires `myTAI (version > 1.0.1.0000)`.  
 ```r
 Aj.PES.log2 <- myTAI::tf(tidyr::drop_na(Aj.PES),FUN = log2, pseudocount = 1)
 hist(Aj.PES.log2$`24H`)
@@ -108,6 +123,7 @@ myTAI::PlotSignature(tidyr::drop_na(Aj.PES.log2))
 ```
 ![Rplot_TAI_log2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/144d0c68-54f8-4af2-be46-539f37fc5211)
 
+</details>
 
 ## Citation
 Citations are provided in the data description. Just put a `?` in front of the dataset.
