@@ -2,7 +2,7 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FLotharukpongJS%2Fphylomapr&label=Visitors&countColor=%23263759&style=flat)
 
-`phylomapr` enables quick retrieval of precomputed gene age maps (phylomaps) in R. Gene age maps loaded from `phylomapr` integrate seamlessly with [`myTAI`](https://github.com/drostlab/myTAI).
+Gene founder events facilitate evolutionary innovations. `phylomapr` enables quick retrieval of precomputed gene age maps (phylomaps) in R. Gene age maps loaded from `phylomapr` integrate _seamlessly_ with [`myTAI`](https://github.com/drostlab/myTAI).
 
 ## Installation
 ```r
@@ -11,12 +11,15 @@ devtools::install_github("LotharukpongJS/phylomapr")
 
 ## Use Cases
 
+### Retrieve gene age maps using `phylomapr`
 Load the `phylomap` of _Apostichopus japonicus_ (Japanese sea cucumber) generated using the [GenEra](https://github.com/josuebarrera/GenEra).
 ```r
+# either
 Aj.map <- phylomapr::Apostichopus_japonicus.PhyloMap
-# or
+# or alternatively
 library(phylomapr)
 Aj.map <- Apostichopus_japonicus.PhyloMap
+
 head(Aj.map)
 ```
 ```
@@ -28,7 +31,7 @@ head(Aj.map)
 5            1 tr|A0A1B2ZDN7|A0A1B2ZDN7_STIJA
 6            2 tr|A0A1X9J403|A0A1X9J403_STIJA
 ```
-Also, get the data description.
+To get the data description.
 ```r
 ?Apostichopus_japonicus.PhyloMap
 ```
@@ -59,14 +62,20 @@ Source:
 
      <https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z>
 ```
-### Loading gene age maps into myTAI
-[`myTAI`](https://github.com/drostlab/myTAI) facilitates evolutionary transcriptomic studies. Gene age maps retrieved from `phylomapr` integrate seamlessly into `myTAI`.
+### Loading gene age maps into `myTAI`
+[`myTAI`](https://github.com/drostlab/myTAI) facilitates evolutionary transcriptomic studies.
+Below are some ways in which gene age maps retrieved via `phylomapr` can be integrate _seamlessly_ into `myTAI`.
+
+#### Plot the developmental hourglass (on simulated gene expression data)
+using simulated developmental gene expression of _Apostichopus japonicus_ (Japanese sea cucumber).
+<details>
+  <summary>Click to see how</summary>
 
 ```r
 Aj.map <- phylomapr::Apostichopus_japonicus.PhyloMap
 ```
 
-Here we simulate developmental gene expression of _Apostichopus japonicus_ (Japanese sea cucumber).
+Simulate developmental gene expression.
 
 ```r
 # Set the random seed for reproducibility
@@ -76,9 +85,9 @@ set.seed(123)
 # Create a data frame with the count table
 Aj.ExpressionMatrix <- tibble::tibble(
   GeneID = Aj.map$GeneID,
-  `24H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 5, sdlog = 0.5),
-  `48H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 5, sdlog = 0.5),
-  `72H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 5, sdlog = 0.5)
+  `24H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 3, sdlog = 1),
+  `48H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 3, sdlog = 1),
+  `72H` = stats::rlnorm(length(Aj.map$GeneID), meanlog = 3, sdlog = 1)
 )
 ```
 ```r
@@ -86,8 +95,35 @@ Aj.PES <- myTAI::MatchMap(Aj.map, Aj.ExpressionMatrix, remove.duplicates = FALSE
 ```
 And test the hourglass on the simulated data.
 ```
-myTAI::PlotSignature(tidyr::drop_na(PES))
+myTAI::PlotSignature(tidyr::drop_na(Aj.PES))
 ```
+![Rplot2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/29c1866f-9abc-4657-bf6a-013570053090)
+
+</details>
+
+#### Next, transform the simulated gene expression data
+<details>
+  <summary>Click to see how</summary>
+
+Note: this requires `myTAI (version > 1.0.1.0000)`.  
+```r
+Aj.PES.log2 <- myTAI::tf(tidyr::drop_na(Aj.PES),FUN = log2, pseudocount = 1)
+hist(Aj.PES.log2$`24H`)
+```
+![Rplot_log2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/1c5ed279-2a13-48a9-af62-f2709ee16fda)
+
+Compare this to the distribution of raw abundance (TPM).
+```r
+hist(Aj.PES$`24H`, breaks = 200)
+```
+![Rplot_TPM](https://github.com/LotharukpongJS/phylomapr/assets/80110649/a29b15a7-c269-427a-9848-acba6b56af9e)
+
+```r
+myTAI::PlotSignature(tidyr::drop_na(Aj.PES.log2))
+```
+![Rplot_TAI_log2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/144d0c68-54f8-4af2-be46-539f37fc5211)
+
+</details>
 
 ## Citation
 Citations are provided in the data description. Just put a `?` in front of the dataset.
