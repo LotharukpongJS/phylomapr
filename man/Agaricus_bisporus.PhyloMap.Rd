@@ -12,7 +12,8 @@ A tibble with 11,204 rows and 2 variables:
 }
 }
 \source{
-\url{https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z}
+Barrera-Redondo et al. (2023) \emph{Genome Biology}
+\url{https://doi.org/10.1186/s13059-023-02895-z}
 }
 \usage{
 Agaricus_bisporus.PhyloMap

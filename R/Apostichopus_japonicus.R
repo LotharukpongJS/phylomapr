@@ -8,5 +8,7 @@
 #'   \item{Phylostratum}{dbl Phylostratum (or gene age) assignment}
 #'   \item{GeneID}{chr GeneID annotation from UniProt}
 #' }
-#' @source \url{https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-02895-z}
+#' @source
+#' Barrera-Redondo et al. (2023) _Genome Biology_
+#' \url{https://doi.org/10.1186/s13059-023-02895-z}
 "Apostichopus_japonicus.PhyloMap"
