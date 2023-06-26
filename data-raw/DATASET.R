@@ -2,6 +2,8 @@
 
 usethis::use_data(DATASET, overwrite = TRUE)
 
+######### Barrera-Redondo et al., 2023 #########
+
 # download the Phylostratigraphic Maps of 10 animals, 10 plants and/or 10 fungi.
 # [Fungus] from Barrera-Redondo et al., 2023
 download.file( url      = "https://static-content.springer.com/esm/art%3A10.1186%2Fs13059-023-02895-z/MediaObjects/13059_2023_2895_MOESM3_ESM.xlsx",
@@ -356,17 +358,101 @@ Marchantia_polymorpha.PhyloMap <-
   ) %>%
   dplyr::mutate(Phylostratum = as.numeric(Phylostratum))
 
+######### Manley et al., 2023 #########
 
-### Save phylomaps ###
+# download the Phylostratigraphic Maps from Manley et al., 2023
+# Rhizophagus irregularis
+download.file( url      = "https://zenodo.org/record/7713976/files/Rhizophagus_irregularis_DAOM197198_1432141_phyloranks.tsv",
+               destfile = "data-raw/Rhizophagus_irregularis_DAOM197198_1432141_phyloranks.tsv")
+# Dissophora decumbens
+download.file( url      = "https://zenodo.org/record/7713976/files/Disdec1_101101_phyloranks.tsv",
+               destfile = "data-raw/Disdec1_101101_phyloranks.tsv")
+# Geosiphon pyriformis
+download.file( url      = "https://zenodo.org/record/7713976/files/Geopyr1_50956_phyloranks.tsv",
+               destfile = "data-raw/Geopyr1_50956_phyloranks.tsv")
+# Gigaspora margarita
+download.file( url      = "https://zenodo.org/record/7713976/files/Gigmar1_4874_phyloranks.tsv",
+               destfile = "data-raw/Gigmar1_4874_phyloranks.tsv")
+# Mortierella elongata
+download.file( url      = "https://zenodo.org/record/7713976/files/Morel2_1314771_phyloranks.tsv",
+               destfile = "data-raw/Morel2_1314771_phyloranks.tsv")
+# Phycomyces blakesleeanus
+download.file( url      = "https://zenodo.org/record/7713976/files/Phybl2_4837_phyloranks.tsv",
+               destfile = "data-raw/Phybl2_4837_phyloranks.tsv")
+# Radiomyces spectabilis
+download.file( url      = "https://zenodo.org/record/7713976/files/Radspe1_64574_phyloranks.tsv",
+               destfile = "data-raw/Radspe1_64574_phyloranks.tsv")
 
-all_phylomaps <- ls(pattern="\\.PhyloMap")
-print(all_phylomaps)
-# for (i in all_phylomaps) {
-#   obj <- base::get(i)
-#   name <- rlang::sym(i)
-#   names(obj) <- rlang::set_names(obj, !!name)
-#   usethis::use_data(obj, overwrite = TRUE)
-# }
+# load package readxl
+library(readr)
+
+### Phylostratigraphic Maps
+# Rhizophagus irregularis
+Rhizophagus_irregularis.data <-readr::read_tsv("data-raw/Rhizophagus_irregularis_DAOM197198_1432141_phyloranks.tsv")
+Rhizophagus_irregularis.PhyloMap <-
+  dplyr::select(
+    Rhizophagus_irregularis.data,
+    Phylostratum = PS,
+    GeneID
+  )
+
+# Dissophora decumbens
+Dissophora_decumbens.data <-readr::read_tsv("data-raw/Disdec1_101101_phyloranks.tsv")
+Dissophora_decumbens.PhyloMap <-
+  dplyr::select(
+    Dissophora_decumbens.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+# Geosiphon pyriformis
+Geosiphon_pyriformis.data <-readr::read_tsv("data-raw/Geopyr1_50956_phyloranks.tsv")
+Geosiphon_pyriformis.PhyloMap <-
+  dplyr::select(
+    Geosiphon_pyriformis.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+# Gigaspora margarita
+Gigaspora_margarita.data <-readr::read_tsv("data-raw/Gigmar1_4874_phyloranks.tsv")
+Gigaspora_margarita.PhyloMap <-
+  dplyr::select(
+    Gigaspora_margarita.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+# Mortierella elongata
+Mortierella_elongata.data <-readr::read_tsv("data-raw/Morel2_1314771_phyloranks.tsv")
+Mortierella_elongata.PhyloMap <-
+  dplyr::select(
+    Mortierella_elongata.data,
+    Phylostratum = rank,
+    GeneID = V1
+  )
+
+# Phycomyces blakesleeanus
+Phycomyces_blakesleeanus.data <-readr::read_tsv("data-raw/Phybl2_4837_phyloranks.tsv")
+Phycomyces_blakesleeanus.PhyloMap <-
+  dplyr::select(
+    Phycomyces_blakesleeanus.data,
+    Phylostratum = rank,
+    GeneID
+  )
+
+# Radiomyces spectabilis
+Radiomyces_spectabilis.data <-readr::read_tsv("data-raw/Radspe1_64574_phyloranks.tsv")
+Radiomyces_spectabilis.PhyloMap <-
+  dplyr::select(
+    Radiomyces_spectabilis.data,
+    Phylostratum = rank,
+    GeneID
+  )
+
+
+######### Save phylomaps #########
+
 usethis::use_data(Agaricus_bisporus.PhyloMap, overwrite = TRUE)
 usethis::use_data(Amphimedon_queenslandica.PhyloMap, overwrite = TRUE)
 usethis::use_data(Apostichopus_japonicus.PhyloMap, overwrite = TRUE)
@@ -398,4 +484,10 @@ usethis::use_data(Tremella_mesenterica.PhyloMap, overwrite = TRUE)
 usethis::use_data(Trichoplax_adhaerens.PhyloMap, overwrite = TRUE)
 usethis::use_data(Vanilla_planifolia.PhyloMap, overwrite = TRUE)
 
-
+usethis::use_data(Rhizophagus_irregularis.PhyloMap, overwrite = TRUE)
+usethis::use_data(Dissophora_decumbens.PhyloMap, overwrite = TRUE)
+usethis::use_data(Geosiphon_pyriformis.PhyloMap, overwrite = TRUE)
+usethis::use_data(Gigaspora_margarita.PhyloMap, overwrite = TRUE)
+usethis::use_data(Mortierella_elongata.PhyloMap, overwrite = TRUE)
+usethis::use_data(Phycomyces_blakesleeanus.PhyloMap, overwrite = TRUE)
+usethis::use_data(Radiomyces_spectabilis.PhyloMap, overwrite = TRUE)
