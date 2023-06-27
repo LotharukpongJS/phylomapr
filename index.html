@@ -121,10 +121,8 @@
 <div class="section level4">
 <h4 id="plot-the-developmental-hourglass-on-simulated-gene-expression-data">Plot the developmental hourglass (on simulated gene expression data)<a class="anchor" aria-label="anchor" href="#plot-the-developmental-hourglass-on-simulated-gene-expression-data"></a>
 </h4>
-using simulated developmental gene expression of <em>Apostichopus japonicus</em> (Japanese sea cucumber).
-<details><summary>
-Click to see how
-</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p>using simulated developmental gene expression of <em>Apostichopus japonicus</em> (Japanese sea cucumber).</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Aj.map</span> <span class="op">&lt;-</span> <span class="fu">phylomapr</span><span class="fu">::</span><span class="va"><a href="reference/Apostichopus_japonicus.PhyloMap.html">Apostichopus_japonicus.PhyloMap</a></span></span></code></pre></div>
 <p>Simulate developmental gene expression.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -146,14 +144,11 @@ Click to see how
 <div class="figure">
 <img src="https://github.com/LotharukpongJS/phylomapr/assets/80110649/29c1866f-9abc-4657-bf6a-013570053090" alt=""><p class="caption">Rplot2</p>
 </div>
-</details>
 </div>
 <div class="section level4">
 <h4 id="next-transform-the-simulated-gene-expression-data">Next, transform the simulated gene expression data<a class="anchor" aria-label="anchor" href="#next-transform-the-simulated-gene-expression-data"></a>
 </h4>
-<details><summary>
-Click to see how
-</summary><p>Note: this requires <code>myTAI (version &gt; 1.0.1.0000)</code>.</p>
+<p>Note: this requires <code>myTAI (version &gt; 1.0.1.0000)</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Aj.PES.log2</span> <span class="op">&lt;-</span> <span class="fu">myTAI</span><span class="fu">::</span><span class="fu">tf</span><span class="op">(</span><span class="fu">tidyr</span><span class="fu">::</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">Aj.PES</span><span class="op">)</span>,FUN <span class="op">=</span> <span class="va">log2</span>, pseudocount <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">Aj.PES.log2</span><span class="op">$</span><span class="va">`24H`</span><span class="op">)</span></span></code></pre></div>
@@ -171,7 +166,6 @@ Click to see how
 <div class="figure">
 <img src="https://github.com/LotharukpongJS/phylomapr/assets/80110649/144d0c68-54f8-4af2-be46-539f37fc5211" alt=""><p class="caption">Rplot_TAI_log2</p>
 </div>
-</details>
 </div>
 </div>
 </div>
@@ -185,7 +179,8 @@ Click to see how
 </h2>
 <p>I would like to thank several individuals for making this project possible.</p>
 <p>First I would like to thank Hajk-Georg Drost for providing me with the intellectual environment that enabled this project.</p>
-<p>Furthermore, I would like to thank Susana M. Coelho, the Max Planck Institute for Biology Tübingen and the Max Planck Society for hosting and facilitating this research. I also thank the BMBF-funded de.NBI Cloud within the German Network for Bioinformatics Infrastructure (de.NBI) (031A532B, 031A533A, 031A533B, 031A534A, 031A535A, 031A537A, 031A537B, 031A537C, 031A537D, 031A538A).</p>
+<p>Furthermore, I would like to thank Susana M. Coelho for hosting and facilitating this research, as well as the Max Planck Institute for Biology Tübingen and the Max Planck Society.</p>
+<p>I also thank the BMBF-funded de.NBI Cloud within the German Network for Bioinformatics Infrastructure (de.NBI) (031A532B, 031A533A, 031A533B, 031A534A, 031A535A, 031A537A, 031A537B, 031A537C, 031A537D, 031A538A).</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">
