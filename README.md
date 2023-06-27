@@ -68,8 +68,6 @@ Below are some ways in which gene age maps retrieved via `phylomapr` can be inte
 
 #### Plot the developmental hourglass (on simulated gene expression data)
 using simulated developmental gene expression of _Apostichopus japonicus_ (Japanese sea cucumber).
-<details>
-  <summary>Click to see how</summary>
 
 ```r
 Aj.map <- phylomapr::Apostichopus_japonicus.PhyloMap
@@ -99,11 +97,7 @@ myTAI::PlotSignature(tidyr::drop_na(Aj.PES))
 ```
 ![Rplot2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/29c1866f-9abc-4657-bf6a-013570053090)
 
-</details>
-
 #### Next, transform the simulated gene expression data
-<details>
-  <summary>Click to see how</summary>
 
 Note: this requires `myTAI (version > 1.0.1.0000)`.  
 ```r
@@ -123,7 +117,6 @@ myTAI::PlotSignature(tidyr::drop_na(Aj.PES.log2))
 ```
 ![Rplot_TAI_log2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/144d0c68-54f8-4af2-be46-539f37fc5211)
 
-</details>
 
 ## Citation
 Citations are provided in the data description. Just put a `?` in front of the dataset.
@@ -133,4 +126,6 @@ I would like to thank several individuals for making this project possible.
 
 First I would like to thank Hajk-Georg Drost for providing me with the intellectual environment that enabled this project.
 
-Furthermore, I would like to thank Susana M. Coelho, the Max Planck Institute for Biology Tübingen and the Max Planck Society for hosting and facilitating this research. I also thank the BMBF-funded de.NBI Cloud within the German Network for Bioinformatics Infrastructure (de.NBI) (031A532B, 031A533A, 031A533B, 031A534A, 031A535A, 031A537A, 031A537B, 031A537C, 031A537D, 031A538A).
+Furthermore, I would like to thank Susana M. Coelho for hosting and facilitating this research, as well as the Max Planck Institute for Biology Tübingen and the Max Planck Society.
+
+I also thank the BMBF-funded de.NBI Cloud within the German Network for Bioinformatics Infrastructure (de.NBI) (031A532B, 031A533A, 031A533B, 031A534A, 031A535A, 031A537A, 031A537B, 031A537C, 031A537D, 031A538A).
