@@ -1,8 +1,6 @@
-# phylomapr <img src="pkgdown/Phylomapr_logo.png" align="right" />
+# phylomapr <img src="man/figures/logo.png" align="right" height="174" width="150" />
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FLotharukpongJS%2Fphylomapr&label=Visitors&countColor=%23263759&style=flat)
-
-# pkgdown <img src="man/figures/logo.png" align="right" />
 
 Gene founder events facilitate evolutionary innovations. `phylomapr` enables quick retrieval of precomputed gene age maps (phylomaps) in R. Gene age maps loaded from `phylomapr` integrate _seamlessly_ with [`myTAI`](https://github.com/drostlab/myTAI).
 
@@ -97,7 +95,7 @@ And test the hourglass on the simulated data.
 ```
 myTAI::PlotSignature(tidyr::drop_na(Aj.PES))
 ```
-![Rplot2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/29c1866f-9abc-4657-bf6a-013570053090)
+![](https://github.com/LotharukpongJS/phylomapr/assets/80110649/29c1866f-9abc-4657-bf6a-013570053090)
 
 #### Next, transform the simulated gene expression data
 
@@ -106,18 +104,18 @@ Note: this requires `myTAI (version > 1.0.1.0000)`.
 Aj.PES.log2 <- myTAI::tf(tidyr::drop_na(Aj.PES),FUN = log2, pseudocount = 1)
 hist(Aj.PES.log2$`24H`)
 ```
-![Rplot_log2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/1c5ed279-2a13-48a9-af62-f2709ee16fda)
+![](https://github.com/LotharukpongJS/phylomapr/assets/80110649/1c5ed279-2a13-48a9-af62-f2709ee16fda)
 
 Compare this to the distribution of raw abundance (TPM).
 ```r
 hist(Aj.PES$`24H`, breaks = 200)
 ```
-![Rplot_TPM](https://github.com/LotharukpongJS/phylomapr/assets/80110649/a29b15a7-c269-427a-9848-acba6b56af9e)
+![](https://github.com/LotharukpongJS/phylomapr/assets/80110649/a29b15a7-c269-427a-9848-acba6b56af9e)
 
 ```r
 myTAI::PlotSignature(tidyr::drop_na(Aj.PES.log2))
 ```
-![Rplot_TAI_log2](https://github.com/LotharukpongJS/phylomapr/assets/80110649/144d0c68-54f8-4af2-be46-539f37fc5211)
+![](https://github.com/LotharukpongJS/phylomapr/assets/80110649/144d0c68-54f8-4af2-be46-539f37fc5211)
 
 
 ## Citation
