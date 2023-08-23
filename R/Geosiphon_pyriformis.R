@@ -1,6 +1,6 @@
 #' Phylomap of Geosiphon pyriformis
 #'
-#' Gene ages inferred using [GenEra](https://github.com/josuebarrera/GenEra) on refence protein sequences from Uniprot proteomes.
+#' Gene ages inferred using [GenEra](https://github.com/josuebarrera/GenEra) on reference protein sequences from Uniprot proteomes.
 #' Note: [DIAMOND](https://github.com/bbuchfink/diamond) was run using the `ultra-sensitive mode`.
 #'
 #' @format A tibble with 23,936 rows and 2 variables:

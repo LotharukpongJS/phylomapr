@@ -1,6 +1,6 @@
 ## code to prepare `DATASET` dataset goes here
 
-usethis::use_data(DATASET, overwrite = TRUE)
+# usethis::use_data(DATASET, overwrite = TRUE)
 
 ######### Barrera-Redondo et al., 2023 #########
 
@@ -450,6 +450,15 @@ Radiomyces_spectabilis.PhyloMap <-
     GeneID
   )
 
+######### Homo sapiens GenEra test #########
+
+Homo_sapiens.data <-readr::read_tsv("data-raw/9606_gene_ages.tsv")
+Homo_sapiens.PhyloMap <-
+  dplyr::select(
+    Homo_sapiens.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+    )
 
 ######### Save phylomaps #########
 
@@ -491,3 +500,5 @@ usethis::use_data(Gigaspora_margarita.PhyloMap, overwrite = TRUE)
 usethis::use_data(Mortierella_elongata.PhyloMap, overwrite = TRUE)
 usethis::use_data(Phycomyces_blakesleeanus.PhyloMap, overwrite = TRUE)
 usethis::use_data(Radiomyces_spectabilis.PhyloMap, overwrite = TRUE)
+
+usethis::use_data(Homo_sapiens.PhyloMap, overwrite = TRUE)

@@ -122,7 +122,7 @@ myTAI::PlotSignature(tidyr::drop_na(Aj.PES.log2))
 Citations are provided in the data description. Just put a `?` in front of the dataset.
 
 ## Acknowledgement
-I would like to thank several individuals for making this project possible.
+I would like to thank several individuals for making this mini-project possible.
 
 First I would like to thank Hajk-Georg Drost for providing me with the intellectual environment that enabled this project.
 

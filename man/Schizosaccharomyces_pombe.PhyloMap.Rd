@@ -19,7 +19,7 @@ Barrera-Redondo et al. (2023) \emph{Genome Biology}
 Schizosaccharomyces_pombe.PhyloMap
 }
 \description{
-Gene ages inferred using \href{https://github.com/josuebarrera/GenEra}{GenEra} on refence protein sequences from Uniprot proteomes.
+Gene ages inferred using \href{https://github.com/josuebarrera/GenEra}{GenEra} on reference protein sequences from Uniprot proteomes.
 Note: \href{https://github.com/bbuchfink/diamond}{DIAMOND} was run using the \verb{ultra-sensitive mode}.
 }
 \keyword{datasets}
