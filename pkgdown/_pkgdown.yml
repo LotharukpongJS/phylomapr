@@ -2,3 +2,11 @@ url: https://lotharukpongjs.github.io/phylomapr/
 template:
   bootstrap: 5
 
+reference:
+- title: Functions
+- contents:
+  - convertID
+- title: Phylomaps
+  desc:  Gene age maps (phylomaps) of various eukaryotes.
+- contents:
+  - ends_with(".PhyloMap")

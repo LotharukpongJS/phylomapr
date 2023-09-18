@@ -1,9 +1,9 @@
 #' Phylomap of Strongylocentrotus purpuratus
 #'
-#' Gene ages inferred using [GenEra](https://github.com/josuebarrera/GenEra) on reference protein sequences from NCBI protien coding genes (https://www.ncbi.nlm.nih.gov/datasets/gene/taxon/7668/?gene-type=Protein-coding).
+#' Gene ages inferred using [GenEra](https://github.com/josuebarrera/GenEra) on reference protein sequences from NCBI protein coding genes (https://www.ncbi.nlm.nih.gov/datasets/gene/taxon/7668/?gene-type=Protein-coding).
 #' Note: [DIAMOND](https://github.com/bbuchfink/diamond) was run using the `ultra-sensitive mode`.
 #'
-#' @format A tibble with 38475 rows and 2 variables:
+#' @format A tibble with 38,475 rows and 2 variables:
 #' \describe{
 #'   \item{Phylostratum}{dbl Phylostratum (or gene age) assignment}
 #'   \item{GeneID}{proteinID annotation from NCBI}
