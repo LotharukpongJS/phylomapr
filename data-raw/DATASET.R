@@ -460,6 +460,16 @@ Homo_sapiens.PhyloMap <-
     GeneID = `#gene`
     )
 
+######### Strongylocentrotus purpuratus GenEra test #########
+
+Strongylocentrotus_purpuratus.data <-readr::read_tsv("data-raw/7668_gene_ages.tsv")
+Strongylocentrotus_purpuratus.PhyloMap <-
+  dplyr::select(
+    Strongylocentrotus_purpuratus.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+    )
+
 ######### Save phylomaps #########
 
 usethis::use_data(Agaricus_bisporus.PhyloMap, overwrite = TRUE)
@@ -502,3 +512,4 @@ usethis::use_data(Phycomyces_blakesleeanus.PhyloMap, overwrite = TRUE)
 usethis::use_data(Radiomyces_spectabilis.PhyloMap, overwrite = TRUE)
 
 usethis::use_data(Homo_sapiens.PhyloMap, overwrite = TRUE)
+usethis::use_data(Strongylocentrotus_purpuratus.PhyloMap, overwrite = TRUE)
