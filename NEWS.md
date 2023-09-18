@@ -2,7 +2,10 @@ phylomapr 0.0.2
 ===========
 
 ## New Functions
-- New function `convertID` to convert Gene IDs between databases (e.g. from uniprot to ensembl)
+- `convertID()` converts Gene IDs between databases (e.g. from uniprot to ensembl)
+
+## New Features
+- Phylomap added for _Strongylocentrotus purpuratus_.
 
 phylomapr 0.0.1
 ===========

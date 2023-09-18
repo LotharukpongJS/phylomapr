@@ -32,6 +32,8 @@ and converts them gene IDs used in another database. This function wraps around 
 \details{
 Gene IDs differ between databases used. Through \code{convertID}, users can obtain
 the corresponding Gene IDs from a different database, e.g. ENSEMBL.
+
+Note: the lowest (oldest) phylostratum for each gene is chosen.
 }
 \examples{
 

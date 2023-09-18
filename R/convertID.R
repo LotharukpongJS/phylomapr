@@ -25,6 +25,8 @@
 #' Gene IDs differ between databases used. Through `convertID`, users can obtain
 #' the corresponding Gene IDs from a different database, e.g. ENSEMBL.
 #'
+#' Note: the lowest (oldest) phylostratum for each gene is chosen.
+#'
 #' @references
 #'
 #' Lotharukpong JS et al. (2023) (unpublished)
