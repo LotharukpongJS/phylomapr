@@ -21,6 +21,12 @@
 #'       dataset = "hsapiens_gene_ensembl",
 #'       filters = "uniprot_gn_id"
 #' )
+#'
+#' # Previously
+#' head(phylomap_example)
+#' # Converted
+#' head(converted_phylomap_example)
+#'
 #' @details
 #' Gene IDs differ between databases used. Through `convertID`, users can obtain
 #' the corresponding Gene IDs from a different database, e.g. ENSEMBL.

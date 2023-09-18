@@ -47,6 +47,12 @@ converted_phylomap_example <- convertID(
       dataset = "hsapiens_gene_ensembl",
       filters = "uniprot_gn_id"
 )
+
+# Previously
+head(phylomap_example)
+# Converted
+head(converted_phylomap_example)
+
 }
 \references{
 Lotharukpong JS et al. (2023) (unpublished)
