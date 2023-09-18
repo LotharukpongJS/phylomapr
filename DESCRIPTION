@@ -1,9 +1,11 @@
 Package: phylomapr
 Title: Quick retrieval of phylomaps
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: 
-    person("Jaruwatana Sodai", "Lotharukpong", , "jaruwatana.lotharukpong@tuebingen.mpg.de", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-3475-0980"))
+    c(person("Jaruwatana Sodai", "Lotharukpong", , "jaruwatana.lotharukpong@tuebingen.mpg.de", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-3475-0980")),
+      person("Marcos", "Bermejo", , "marcos.bermejo@tuebingen.mpg.de", role = "ctb",
+            comment = c(ORCID = "0009-0009-7908-4641")))
 Description: Get precomputed gene age maps (phylomaps) in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -11,5 +13,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: 
     R (>= 2.10)
+Imports:
+    biomartr,
+    stringr (>= 0.6.2),
+    dplyr (>= 0.3.0.2),
+    rlang
 LazyData: true
 URL: https://lotharukpongjs.github.io/phylomapr/

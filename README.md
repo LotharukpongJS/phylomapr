@@ -6,6 +6,12 @@ Gene founder events facilitate evolutionary innovations. `phylomapr` enables qui
 
 ## Installation
 ```r
+# install biomartr
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("ropensci/biomartr")
+
 devtools::install_github("LotharukpongJS/phylomapr")
 ```
 
