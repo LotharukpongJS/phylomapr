@@ -86,7 +86,7 @@ convertID <- function(
 
   # join phylomap with biomartr ENSEMBL ids
   converted_phylomap_joined <-
-    dplyr::inner_join(converted_phylomap, result_BM, by = "uniprot_gn_id")
+    dplyr::inner_join(converted_phylomap, result_BM, by = filters)
 
   # select the lowest (= oldest) Phylostratum value for each ensembl_gene_id
   converted_phylomap_joined_filtered <-
