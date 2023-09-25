@@ -1,0 +1,96 @@
+---
+title: "Gene names in different databases"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+fig_caption: yes
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Gene names in different databases}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(phylomapr)
+library(dplyr)
+library(biomartr)
+options(width = 750)
+knitr::opts_chunk$set(
+  comment = "#>",
+  error = FALSE,
+  tidy = FALSE)
+```
+
+## Motivation
+
+The GeneID labels differ across databases. This is a potential problem when gene age inference has been performed from protein sequences obtained from one database (e.g. UniProtKB) and the RNA-seq quantification has been performed on genes from another database (e.g. ENSEMBL).
+
+## Solution
+
+In `phylomapr`, we try to mitigate this issue using the helper function `convertID()`, which essentially wraps around the function `biomart()` in the [`biomartr`](https://docs.ropensci.org/biomartr/) package. In this article, we give an example of how _C. elegans_ phylomaps can be converted.
+
+First, the following two function in `biomartr` can be used to obtain the phylomaps.
+
+```{r, message = FALSE, results='hide', warning = FALSE}
+c_elegans_BM.filt <- organismFilters(organism = "Caenorhabditis elegans", topic = "id")
+```
+
+```{r}
+c_elegans_BM.filt
+```
+
+Here, we can see that the `uniprot_gn_id` filter is available and can be employed with the dataset `celegans_gene_ensembl` from mart `ENSEMBL_MART_ENSEMBL`.
+
+Next, we convert the GeneID labels from uniprot to ensembl.
+
+```{r}
+# here we use the dataset phylomapr::Caenorhabditis_elegans.PhyloMap
+Caenorhabditis_elegans.PhyloMap.ENSEMBL <- 
+  phylomapr::convertID(
+    phylomap = phylomapr::Caenorhabditis_elegans.PhyloMap,
+    mart = "ENSEMBL_MART_ENSEMBL",
+    dataset = "celegans_gene_ensembl",
+    filters = "uniprot_gn_id"
+    )
+```
+
+```r
+> phylomapr::Caenorhabditis_elegans.PhyloMap
+# A tibble: 19,818 × 2
+   Phylostratum GeneID                   
+          <dbl> <chr>                    
+ 1            2 sp|A0A061ACU2|PIEZ1_CAEEL
+ 2            3 sp|A0A078BQN7|FKH3_CAEEL 
+ 3            1 sp|A0A078BQP2|GCY25_CAEEL
+ 4           10 sp|A0A0K3AUE4|SEA2_CAEEL 
+ 5            1 sp|A0A0K3AUJ9|PRDX_CAEEL 
+ 6            1 sp|A0A0K3AV08|MLK1_CAEEL 
+ 7            1 sp|A0A0K3AWM6|MOM5_CAEEL 
+ 8            3 sp|A0A0K3AXH1|ARID1_CAEEL
+ 9            1 sp|A0A131MBU3|IRG7_CAEEL 
+10            1 sp|A0A131MCZ8|CNNM3_CAEEL
+# ℹ 19,808 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+
+```r
+> Caenorhabditis_elegans.PhyloMap.ENSEMBL
+# A tibble: 10,510 × 2
+   Phylostratum GeneID        
+          <dbl> <chr>         
+ 1            3 WBGene00000001
+ 2            1 WBGene00000002
+ 3            1 WBGene00000003
+ 4            1 WBGene00000004
+ 5            1 WBGene00000005
+ 6            1 WBGene00000006
+ 7            1 WBGene00000007
+ 8            1 WBGene00000008
+ 9            1 WBGene00000009
+10            1 WBGene00000010
+# ℹ 10,500 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+
+## Discussion
+
+While the conversion issue between databases are mitigated, there are still some aspects to be improved. For example, we can see a drop in the number of genes now in the phylomap. Despite this, until a phylomap is created for the ENSEMBL genes, this function provides a stop-gap measure.

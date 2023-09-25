@@ -61,10 +61,18 @@ convertID <- function(
 
   # Get a character vector containing all the gene names for input to biomartr::biomart(...)
 
-  gene_input <-
-    base::unlist(
-      base::lapply(phylomap$GeneID, function(x)
-        base::unlist(stringr::str_split(x, "[|]"))[2]))
+  if(filters == "uniprot_gn_id"){
+    gene_input <-
+      base::unlist(
+        base::lapply(phylomap$GeneID, function(x)
+          base::unlist(stringr::str_split(x, "[|]"))[2]))
+  }else{
+    gene_input <-
+      base::unlist(phylomap$GeneID)
+    # outside of the case of "uniprot_gn_id", the GeneIDs do not have two `|`.
+    # so the above process is not needed.
+  }
+
   # Map UniProtKB IDs to ENSEMBL gene ids
   # genes were retrieved using biomartr::getGenome()
   # marts were selected with biomartr::getMarts()
@@ -89,6 +97,9 @@ convertID <- function(
     dplyr::inner_join(converted_phylomap, result_BM, by = filters)
 
   # select the lowest (= oldest) Phylostratum value for each ensembl_gene_id
+  Phylostratum <- NULL
+  # https://www.r-bloggers.com/2019/08/no-visible-binding-for-global-variable/
+
   converted_phylomap_joined_filtered <-
     dplyr::group_by_at(converted_phylomap_joined,
                        dplyr::vars(attributes[1])) |>
