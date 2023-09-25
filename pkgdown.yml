@@ -1,8 +1,9 @@
 pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
-articles: {}
-last_built: 2023-09-21T09:03Z
+articles:
+  GeneIDs: GeneIDs.html
+last_built: 2023-09-25T12:49Z
 urls:
   reference: https://lotharukpongjs.github.io/phylomapr/reference
   article: https://lotharukpongjs.github.io/phylomapr/articles
