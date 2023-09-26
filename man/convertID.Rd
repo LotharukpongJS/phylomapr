@@ -9,7 +9,8 @@ convertID(
   mart = "ENSEMBL_MART_ENSEMBL",
   dataset = NULL,
   attributes = c("ensembl_gene_id", "ensembl_peptide_id"),
-  filters = "uniprot_gn_id"
+  filters = "uniprot_gn_id",
+  split_uniprot_gene = TRUE
 )
 }
 \arguments{
@@ -24,6 +25,8 @@ obtain available marts using \code{biomartr::getMarts()}.}
 \item{attributes}{a character vector specifying the attributes that shall be used, e.g. \code{attributes = c("ensembl_gene_id", "ensembl_peptide_id")}.}
 
 \item{filters}{a character vector specifying the filter (query key) for the BioMart query, \verb{e.g. filter = "uniprot_gn_id"}.}
+
+\item{split}{a Boolean value specifying whether the uniprot geneIDs (e.g. sp|A0A061ACU2|PIEZ1_CAEEL) should be split (via \verb{stringr::str_split(x, "[|]"))[2])})}
 }
 \description{
 \emph{convertID} takes a phylomap with gene IDs from one database

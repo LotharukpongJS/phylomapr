@@ -8,6 +8,7 @@
 #' @param dataset a character string specifying the dataset within the mart to be used, e.g. `dataset = "hsapiens_gene_ensembl"`.
 #' @param attributes a character vector specifying the attributes that shall be used, e.g. `attributes = c("ensembl_gene_id", "ensembl_peptide_id")`.
 #' @param filters a character vector specifying the filter (query key) for the BioMart query, `e.g. filter = "uniprot_gn_id"`.
+#' @param split a Boolean value specifying whether the uniprot geneIDs (e.g. sp|A0A061ACU2|PIEZ1_CAEEL) should be split (via `stringr::str_split(x, "[|]"))[2])`)
 #' @importFrom rlang `:=`
 #' @examples
 #'
@@ -46,7 +47,8 @@ convertID <- function(
     mart = "ENSEMBL_MART_ENSEMBL",
     dataset = NULL,
     attributes = c("ensembl_gene_id", "ensembl_peptide_id"),
-    filters = "uniprot_gn_id"
+    filters = "uniprot_gn_id",
+    split_uniprot_gene = TRUE
 ){
 
   message("Starting Gene ID conversion...")
@@ -61,7 +63,7 @@ convertID <- function(
 
   # Get a character vector containing all the gene names for input to biomartr::biomart(...)
 
-  if(filters == "uniprot_gn_id"){
+  if(filters == "uniprot_gn_id" & split_uniprot_gene){
     gene_input <-
       base::unlist(
         base::lapply(phylomap$GeneID, function(x)
@@ -109,6 +111,10 @@ convertID <- function(
 
   # format map
   res_phylomap <- converted_phylomap_joined_filtered[c(2,1)]
+  # remove NAs in GeneID
+  res_phylomap <- res_phylomap[!is.na(res_phylomap[,2]),]
+  # remove emptyp GeneID
+  res_phylomap <- res_phylomap[res_phylomap[,2] != "",]
 
   return(res_phylomap)
 }
