@@ -73,7 +73,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Gene names in different databases</h1>
             
-            <h4 data-toc-skip class="date">2023-09-25</h4>
+            <h4 data-toc-skip class="date">2023-09-26</h4>
       
       
       <div class="d-none name"><code>GeneIDs.Rmd</code></div>
@@ -97,34 +97,13 @@ quantification has been performed on genes from another database
 helper function <code><a href="../reference/convertID.html">convertID()</a></code>, which essentially wraps around
 the function <code>biomart()</code> in the <a href="https://docs.ropensci.org/biomartr/" class="external-link"><code>biomartr</code></a>
 package. In this article, we give an example of how <em>C. elegans</em>
-phylomaps can be converted.</p>
-<p>First, the following two function in <code>biomartr</code> can be
-used to obtain the phylomaps.</p>
+phylomaps can be converted from the uniprot format to the wormbase
+format.</p>
+<p>Typically, the gene IDs can be converted to the ENSEMBLE gene IDs,
+whose <code>biomartr</code> attributes are <code>ensembl_gene_id</code>
+and <code>ensembl_peptide_id</code> by default.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">c_elegans_BM.filt</span> <span class="op">&lt;-</span> <span class="fu">organismFilters</span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"Caenorhabditis elegans"</span>, topic <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">c_elegans_BM.filt</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 108 × 4</span></span></span>
-<span><span class="co">#&gt;    name                  description                                           dataset               mart                </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> with_protein_id       With INSDC protein ID ID(s)                           celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> with_refseq_peptide   With RefSeq peptide ID(s)                             celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> with_wormpep_id       With Wormpep ID ID(s)                                 celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> ensembl_gene_id       Gene stable ID(s) [e.g. WBGene00000001]               celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> ensembl_transcript_id Transcript stable ID(s) [e.g. 2L52.1a.1]              celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> ensembl_peptide_id    Protein stable ID(s) [e.g. 2L52.1a.1]                 celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> ensembl_exon_id       Exon ID(s) [e.g. 2L52.1a.1.e1]                        celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> protein_id            INSDC protein ID(s) [e.g. AAA03517]                   celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> entrezgene_id         NCBI gene (formerly Entrezgene) ID(s) [e.g. 13179109] celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> refseq_peptide        RefSeq peptide ID(s) [e.g. NP_001020957]              celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 98 more rows</span></span></span></code></pre>
-<p>Here, we can see that the <code>uniprot_gn_id</code> filter is
-available and can be employed with the dataset
-<code>celegans_gene_ensembl</code> from mart
-<code>ENSEMBL_MART_ENSEMBL</code>.</p>
-<p>Next, we convert the GeneID labels from uniprot to ensembl.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># here we use the dataset phylomapr::Caenorhabditis_elegans.PhyloMap</span></span>
+<code class="sourceCode R"><span><span class="co"># default run of convertID</span></span>
 <span><span class="va">Caenorhabditis_elegans.PhyloMap.ENSEMBL</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu">phylomapr</span><span class="fu">::</span><span class="fu"><a href="../reference/convertID.html">convertID</a></span><span class="op">(</span></span>
 <span>    phylomap <span class="op">=</span> <span class="fu">phylomapr</span><span class="fu">::</span><span class="va"><a href="../reference/Caenorhabditis_elegans.PhyloMap.html">Caenorhabditis_elegans.PhyloMap</a></span>,</span>
@@ -132,51 +111,90 @@ available and can be employed with the dataset
 <span>    dataset <span class="op">=</span> <span class="st">"celegans_gene_ensembl"</span>,</span>
 <span>    filters <span class="op">=</span> <span class="st">"uniprot_gn_id"</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
+<p>If you run this, the gene IDs are named as
+e.g. <code>WBGene00000001</code>. However, gene IDs in other RNA-seq
+experiments employ other gene names. In the case of <em>C. elegans</em>
+this may be wormbase IDs (e.g. <code>2L52.1a</code>). How can we convert
+the phylomaps to accommodate this?</p>
+<p>First, the <code>organismFilters</code> function in
+<code>biomartr</code> can be used to obtain the attributes. Here, we ask
+for the topic <code>worm</code> because we are interested in wormbase
+IDs</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">c_elegans_BM.filt</span> <span class="op">&lt;-</span> <span class="fu">organismFilters</span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"Caenorhabditis elegans"</span>, topic <span class="op">=</span> <span class="st">"worm"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">c_elegans_BM.filt</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 72 × 4</span></span></span>
+<span><span class="co">#&gt;    name                     description                                             dataset               mart                </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> with_wormbase_cds        With WormBase CDS ID(s)                                 celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> with_wormbase_gene       With WormBase Gene ID(s)                                celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> with_wormbase_gseqname   With WormBase Gene Sequence-name ID(s)                  celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> with_wormbase_locus      With WormBase Locus ID(s)                               celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> with_wormbase_transcript With WormBase Transcript ID(s)                          celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> with_wormpep_id          With Wormpep ID ID(s)                                   celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> wormbase_cds             WormBase CDS ID(s) [e.g. 2L52.1a]                       celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> wormbase_gene            WormBase Gene ID(s) [e.g. WBGene00000001]               celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> wormbase_gseqname        WormBase Gene Sequence-name ID(s) [e.g. WBGene00000001] celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> wormbase_locus           WormBase Locus ID(s) [e.g. WBGene00000001]              celegans_gene_ensembl ENSEMBL_MART_ENSEMBL</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 62 more rows</span></span></span></code></pre>
+<p>After scrolling through the results, we observe that the attribute
+<code>wormbase_cds</code> should work as the IDs are formatted in the
+<code>2L52.1a.1</code>-form.</p>
+<p>Next, we convert the GeneID labels from uniprot to wormbase using
+<code>"wormbase_cds"</code> as the attribute.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># here we use the dataset phylomapr::Caenorhabditis_elegans.PhyloMap</span></span>
+<span><span class="va">Celegans.PhyloMap</span> <span class="op">&lt;-</span> <span class="fu">phylomapr</span><span class="fu">::</span><span class="va"><a href="../reference/Caenorhabditis_elegans.PhyloMap.html">Caenorhabditis_elegans.PhyloMap</a></span></span>
+<span></span>
+<span><span class="va">Celegans.PhyloMap.wormbase</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">phylomapr</span><span class="fu">::</span><span class="fu"><a href="../reference/convertID.html">convertID</a></span><span class="op">(</span></span>
+<span>    phylomap <span class="op">=</span> <span class="va">Celegans.PhyloMap</span>,</span>
+<span>    mart <span class="op">=</span> <span class="st">"ENSEMBL_MART_ENSEMBL"</span>,</span>
+<span>    dataset <span class="op">=</span> <span class="st">"celegans_gene_ensembl"</span>,</span>
+<span>    attributes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"wormbase_cds"</span><span class="op">)</span>,</span>
+<span>    filters    <span class="op">=</span> <span class="st">"uniprot_gn_id"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Starting Gene ID conversion...</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; Starting BioMart query ...</span></span></code></pre>
 <pre><code><span><span class="co">#&gt; Warning: Ensembl will soon enforce the use of https.</span></span>
 <span><span class="co">#&gt; Ensure the 'host' argument includes "https://"</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> phylomapr<span class="sc">::</span>Caenorhabditis_elegans.PhyloMap</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 19,818 × 2</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>   Phylostratum GeneID                   </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                    </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>            <span class="dv">2</span> sp<span class="sc">|</span>A0A061ACU2<span class="sc">|</span>PIEZ1_CAEEL</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>            <span class="dv">3</span> sp<span class="sc">|</span>A0A078BQN7<span class="sc">|</span>FKH3_CAEEL </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A078BQP2<span class="sc">|</span>GCY25_CAEEL</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>           <span class="dv">10</span> sp<span class="sc">|</span>A0A0K3AUE4<span class="sc">|</span>SEA2_CAEEL </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AUJ9<span class="sc">|</span>PRDX_CAEEL </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AV08<span class="sc">|</span>MLK1_CAEEL </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AWM6<span class="sc">|</span>MOM5_CAEEL </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>            <span class="dv">3</span> sp<span class="sc">|</span>A0A0K3AXH1<span class="sc">|</span>ARID1_CAEEL</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A131MBU3<span class="sc">|</span>IRG7_CAEEL </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A131MCZ8<span class="sc">|</span>CNNM3_CAEEL</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 19,808 more rows</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Caenorhabditis_elegans.PhyloMap.ENSEMBL</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 10,510 × 2</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>   Phylostratum GeneID        </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>            <span class="dv">3</span> WBGene00000001</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>            <span class="dv">1</span> WBGene00000002</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>            <span class="dv">1</span> WBGene00000003</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>            <span class="dv">1</span> WBGene00000004</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>            <span class="dv">1</span> WBGene00000005</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>            <span class="dv">1</span> WBGene00000006</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>            <span class="dv">1</span> WBGene00000007</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>            <span class="dv">1</span> WBGene00000008</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>            <span class="dv">1</span> WBGene00000009</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>            <span class="dv">1</span> WBGene00000010</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 10,500 more rows</span></span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Celegans.PhyloMap</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 19,818 × 2</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>   Phylostratum GeneID                   </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                    </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>            <span class="dv">2</span> sp<span class="sc">|</span>A0A061ACU2<span class="sc">|</span>PIEZ1_CAEEL</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>            <span class="dv">3</span> sp<span class="sc">|</span>A0A078BQN7<span class="sc">|</span>FKH3_CAEEL </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A078BQP2<span class="sc">|</span>GCY25_CAEEL</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>           <span class="dv">10</span> sp<span class="sc">|</span>A0A0K3AUE4<span class="sc">|</span>SEA2_CAEEL </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AUJ9<span class="sc">|</span>PRDX_CAEEL </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AV08<span class="sc">|</span>MLK1_CAEEL </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AWM6<span class="sc">|</span>MOM5_CAEEL </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>            <span class="dv">3</span> sp<span class="sc">|</span>A0A0K3AXH1<span class="sc">|</span>ARID1_CAEEL</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A131MBU3<span class="sc">|</span>IRG7_CAEEL </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A131MCZ8<span class="sc">|</span>CNNM3_CAEEL</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 19,808 more rows</span></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="discussion">Discussion<a class="anchor" aria-label="anchor" href="#discussion"></a>
-</h2>
-<p>While the conversion issue between databases are mitigated, there are
-still some aspects to be improved. For example, we can see a drop in the
-number of genes now in the phylomap. Despite this, until a phylomap is
-created for the ENSEMBL genes, this function provides a stop-gap
-measure.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Celegans.PhyloMap.wormbase</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 16,319 × 2</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>   Phylostratum GeneID  </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>            <span class="dv">2</span> 2RSSE<span class="fl">.1</span>a</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>            <span class="dv">2</span> 2RSSE<span class="fl">.1</span>b</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>            <span class="dv">2</span> 2RSSE<span class="fl">.1</span>c</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>           <span class="dv">14</span> 3R5<span class="fl">.1</span>a  </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>           <span class="dv">14</span> 3R5<span class="fl">.1</span>b  </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>            <span class="dv">1</span> 4R79<span class="fl">.1</span>a </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>            <span class="dv">1</span> 4R79<span class="fl">.1</span>b </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>            <span class="dv">1</span> AC3<span class="fl">.10</span>  </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>           <span class="dv">11</span> AC3<span class="fl">.1</span>a  </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>           <span class="dv">11</span> AC3<span class="fl">.1</span>b  </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 16,309 more rows</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<p>Tada! While the conversion issue between databases are mitigated,
+there are still some aspects to be improved. For example, we can see a
+drop in the number of genes in the phylomap. Furthermore, a bit of
+fidgeting with <code>biomartr</code> is needed. However, this should
+still be faster than running gene age inference from scratch!</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
