@@ -8,7 +8,7 @@
 #' @param dataset a character string specifying the dataset within the mart to be used, e.g. `dataset = "hsapiens_gene_ensembl"`.
 #' @param attributes a character vector specifying the attributes that shall be used, e.g. `attributes = c("ensembl_gene_id", "ensembl_peptide_id")`.
 #' @param filters a character vector specifying the filter (query key) for the BioMart query, `e.g. filter = "uniprot_gn_id"`.
-#' @param split a Boolean value specifying whether the uniprot geneIDs (e.g. sp|A0A061ACU2|PIEZ1_CAEEL) should be split (via `stringr::str_split(x, "[|]"))[2])`)
+#' @param split_uniprot_gene a Boolean value specifying whether the uniprot geneIDs (e.g. sp|A0A061ACU2|PIEZ1_CAEEL) should be split (via `stringr::str_split(x, "[|]"))[2])`)
 #' @importFrom rlang `:=`
 #' @examples
 #'

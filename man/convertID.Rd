@@ -26,7 +26,7 @@ obtain available marts using \code{biomartr::getMarts()}.}
 
 \item{filters}{a character vector specifying the filter (query key) for the BioMart query, \verb{e.g. filter = "uniprot_gn_id"}.}
 
-\item{split}{a Boolean value specifying whether the uniprot geneIDs (e.g. sp|A0A061ACU2|PIEZ1_CAEEL) should be split (via \verb{stringr::str_split(x, "[|]"))[2])})}
+\item{split_uniprot_gene}{a Boolean value specifying whether the uniprot geneIDs (e.g. sp|A0A061ACU2|PIEZ1_CAEEL) should be split (via \verb{stringr::str_split(x, "[|]"))[2])})}
 }
 \description{
 \emph{convertID} takes a phylomap with gene IDs from one database
