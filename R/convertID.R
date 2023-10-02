@@ -63,7 +63,7 @@ convertID <- function(
 
   # Get a character vector containing all the gene names for input to biomartr::biomart(...)
 
-  if(filters == "uniprot_gn_id" & split_uniprot_gene){
+  if(split_uniprot_gene){
     gene_input <-
       base::unlist(
         base::lapply(phylomap$GeneID, function(x)
