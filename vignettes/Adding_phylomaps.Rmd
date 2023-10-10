@@ -1,5 +1,5 @@
 ---
-title: "Adding phylomaps to `phylomapr`"
+title: "Adding phylomaps to phylomapr"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 fig_caption: yes
