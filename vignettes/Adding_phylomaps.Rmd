@@ -22,7 +22,7 @@ This package aims to provide easy access to pre-computed phylomaps. But the tree
 
 ## Easy option
 
-The easiest (easy here for you, not for me) way  to contribute is to just post a github issue with the link to where the phylomap is hosted or the paper that contains the phylomap and describe the method that was employed to obtain it (e.g. the version of gene age inference tools such as `GenEra` and parameters of the sequence aligner)! The maintainers of phylomapr can then add the phylomaps manually from the link and description provided.
+The easiest way (easy here for you, not for me) to contribute is to just post a github issue with the link to where the phylomap is hosted or the paper that contains the phylomap and describe the method that was employed to obtain it (e.g. the version of gene age inference tools such as `GenEra` and parameters of the sequence aligner)! The maintainers of phylomapr can then add the phylomaps manually from the link and description provided.
 
 ## Advanced option
 
@@ -100,7 +100,7 @@ which leads to this:
 
 5) Run the lines you've added in `DATASET.R`
 
-For the next steps go to the section [__Documenting the new phylomap__](#Documenting-the-new-phylomap)
+For the next steps go to the section [__Documenting the new phylomap__](#documenting-the-new-phylomap)
 
 #### If you want to load your phylomaps (.tsv or .csv files etc.) manually:
 
@@ -154,7 +154,7 @@ usethis::use_data(Strongylocentrotus_purpuratus.PhyloMap, overwrite = TRUE)
 
 5) Run the lines you've added in `DATASET.R`
 
-For the next steps go to the section [__Documenting the new phylomap__](#Documenting-the-new-phylomap)
+For the next steps go to the section [__Documenting the new phylomap__](#documenting-the-new-phylomap)
 
 #### Documenting the new phylomap
 
