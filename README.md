@@ -123,6 +123,11 @@ myTAI::PlotSignature(tidyr::drop_na(Aj.PES.log2))
 ```
 ![](https://github.com/LotharukpongJS/phylomapr/assets/80110649/144d0c68-54f8-4af2-be46-539f37fc5211)
 
+## Tutorials
+
+- [Gene names in different databases](https://lotharukpongjs.github.io/phylomapr/articles/GeneIDs.html): GeneIDs can differ between databases. This could be an issue when the gene age is estimated with one gene naming convention and the RNA-seq mapping is done with another. This tutorial shows how one could convert gene IDs (`convertID()`) between databases.
+
+- [Adding phylomaps to `phylomapr`](https://lotharukpongjs.github.io/phylomapr/articles/Adding_phylomaps.html): Advanced gene age (phylo)mappers who ran their own gene age inference may want to contribute to `phylomapr`, which is at its core a collaborative effort. This tutorial shows how one could add new phylomaps to `phylomapr`.
 
 ## Citation
 Citations are provided in the data description. Just put a `?` in front of the dataset.

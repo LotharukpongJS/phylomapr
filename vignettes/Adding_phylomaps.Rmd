@@ -1,0 +1,191 @@
+---
+title: "Adding phylomaps to `phylomapr`"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+fig_caption: yes
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Adding phylomaps to phylomapr}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+```{r, echo = FALSE, message = FALSE}
+library(phylomapr)
+options(width = 750)
+knitr::opts_chunk$set(
+  comment = "#>",
+  error = FALSE,
+  tidy = FALSE)
+```
+
+This package aims to provide easy access to pre-computed phylomaps. But the tree of life is huge (there are at least [millions of eukaryotic species](https://www.nature.com/articles/news.2011.498)) and so the production of phylomaps, be it for evolutionary transcriptomics or other genomics/transcriptomics/proteomics studies, is a joint effort. For advanced gene age mappers who have generated their own phylomaps and would like to contribute to `phylomapr`, here is a short tutorial to do just that!
+
+## Easy option
+
+The easiest (easy here for you, not for me) way  to contribute is to just post a github issue with the link to where the phylomap is hosted or the paper that contains the phylomap and describe the method that was employed to obtain it (e.g. the version of gene age inference tools such as `GenEra` and parameters of the sequence aligner)! The maintainers of phylomapr can then add the phylomaps manually from the link and description provided.
+
+## Advanced option
+
+For even more advanced phylomappers, here is how you can contribute. 
+
+Note: this might change if we move the site where phylomaps are hosted.
+
+1) Fork the `phylomapr` repository and clone it in R (see tutorial [here](https://www.camplab.net/adding-code-to-an-r-package/): read until the end of `B. Rstudio` section).
+
+#### If a link to where the phylomap is hosted exists:
+
+2) Open the `DATASET.R` in the directory `data-raw` and add the download line, e.g.
+
+```R
+######### Manley et al., 2023 #########
+
+# download the Phylostratigraphic Maps from Manley et al., 2023
+# Rhizophagus irregularis
+download.file( url      = "https://zenodo.org/record/7713976/files/Rhizophagus_irregularis_DAOM197198_1432141_phyloranks.tsv",
+               destfile = "data-raw/Rhizophagus_irregularis_DAOM197198_1432141_phyloranks.tsv")
+```
+
+Here you would describe the dataset (in `#`) differently and have a different download link.
+
+3) In `DATASET.R`, create a `[Species].PhyloMap` object from the downloaded file. There are many ways to do this and this is just an example. Make sure that the name of the `[Species].PhyloMap` object isn't duplicated. If so, add some more information e.g. the geneID convention i.e. `[Species].ENSEMBL.PhyloMap`.
+
+```R
+# load package readxl
+library(readr)
+
+### Phylostratigraphic Maps
+# Rhizophagus irregularis
+Rhizophagus_irregularis.data <-readr::read_tsv("data-raw/Rhizophagus_irregularis_DAOM197198_1432141_phyloranks.tsv")
+Rhizophagus_irregularis.PhyloMap <-
+  dplyr::select(
+    Rhizophagus_irregularis.data,
+    Phylostratum = PS,
+    GeneID
+  )
+```
+
+The most important thing is that the `[Species].PhyloMap` object has the first column with phylostratum titled `Phylostratum` and the second column with the GeneID titled `GeneID`.
+
+```R
+> phylomapr::Rhizophagus_irregularis.PhyloMap
+# A tibble: 31,217 × 2
+   Phylostratum GeneID   
+          <dbl> <chr>    
+ 1            8 g100-T1  
+ 2            6 g1000-T1 
+ 3            2 g10000-T1
+ 4            9 g10001-T1
+ 5            1 g10002-T1
+ 6            1 g10003-T1
+ 7            1 g10004-T1
+ 8            1 g10005-T1
+ 9            1 g10006-T1
+10            1 g10007-T1
+# ℹ 31,207 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+
+4) At the bottom of `DATASET.R`, run `usethis::use_data()` on the `[Species].PhyloMap` object you've created, e.g.
+
+```R
+usethis::use_data(Rhizophagus_irregularis.PhyloMap2, overwrite = TRUE)
+```
+
+which leads to this:
+
+```R
+✔ Saving 'Rhizophagus_irregularis.PhyloMap' to 'data/Rhizophagus_irregularis.PhyloMap.rda'
+• Document your data (see 'https://r-pkgs.org/data.html')
+```
+
+5) Run the lines you've added in `DATASET.R`
+
+For the next steps go to the section [__Documenting the new phylomap__](#Documenting-the-new-phylomap)
+
+#### If you want to load your phylomaps (.tsv or .csv files etc.) manually:
+
+2) Add the raw output of gene age inference (e.g. `[taxid]_gene_ages.tsv` from GenEra) to the directory `data-raw`.
+
+3) In `DATASET.R`, create a `[Species].PhyloMap` object from the added raw file. There are many ways to do this and this is just an example. Make sure that the name of the `[Species].PhyloMap` object isn't duplicated. If so, add some more information e.g. the geneID convention i.e. `[Species].ENSEMBL.PhyloMap`.
+
+```R
+######### Strongylocentrotus purpuratus GenEra test #########
+
+Strongylocentrotus_purpuratus.data <-readr::read_tsv("data-raw/7668_gene_ages.tsv")
+Strongylocentrotus_purpuratus.PhyloMap <-
+  dplyr::select(
+    Strongylocentrotus_purpuratus.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+    )
+```
+
+The most important thing is that the `[Species].PhyloMap` object has the first column with phylostratum titled `Phylostratum` and the second column with the GeneID titled `GeneID`.
+
+```R
+> phylomapr::Strongylocentrotus_purpuratus.PhyloMap
+# A tibble: 38,475 × 2
+   Phylostratum GeneID        
+          <dbl> <chr>         
+ 1            1 NP_001001474.1
+ 2            1 NP_001001475.1
+ 3            1 NP_001001476.1
+ 4            2 NP_001001477.1
+ 5            1 NP_001001478.1
+ 6            4 NP_001001768.2
+ 7            1 NP_001001906.1
+ 8            2 NP_001003798.1
+ 9            1 NP_001005725.1
+10            1 NP_001008790.1
+# ℹ 38,465 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+
+4) At the bottom of `DATASET.R`, run `usethis::use_data` on the `[Species].PhyloMap` object you've created, e.g.
+
+```R
+usethis::use_data(Strongylocentrotus_purpuratus.PhyloMap, overwrite = TRUE)
+```
+
+```R
+✔ Saving 'Strongylocentrotus_purpuratus.PhyloMap' to 'data/Strongylocentrotus_purpuratus.PhyloMap.rda'
+• Document your data (see 'https://r-pkgs.org/data.html')
+```
+
+5) Run the lines you've added in `DATASET.R`
+
+For the next steps go to the section [__Documenting the new phylomap__](#Documenting-the-new-phylomap)
+
+#### Documenting the new phylomap
+
+6) Add the description for your new phylomapr using `usethis::use_r()`, i.e. `usethis::use_r("[Species].R")` (note: the format used in `phylomapr` doesn't contain the `.PhyloMap` suffix). For example, if I want to add the description for _Strongylocentrotus purpuratus_
+
+```R
+usethis::use_r("Strongylocentrotus_purpuratus.R")
+```
+
+The description file contains how gene ages are inferred, any notes on the parameters, the number of rows in the data frame, the number of variables, the source (under `@source`) and finally `"[Species].PhyloMap"`.
+
+```
+#' Phylomap of Strongylocentrotus purpuratus
+#'
+#' Gene ages inferred using [GenEra](https://github.com/josuebarrera/GenEra) on reference protein sequences from NCBI protein coding genes (https://www.ncbi.nlm.nih.gov/datasets/gene/taxon/7668/?gene-type=Protein-coding).
+#' Note: [DIAMOND](https://github.com/bbuchfink/diamond) was run using the `ultra-sensitive mode`.
+#'
+#' @format A tibble with 38,475 rows and 2 variables:
+#' \describe{
+#'   \item{Phylostratum}{dbl Phylostratum (or gene age) assignment}
+#'   \item{GeneID}{proteinID annotation from NCBI}
+#' }
+#' @source
+#' Bermejo (2023) _Unpublished_
+#' \url{https://github.com/LotharukpongJS/phylomapr}
+"Strongylocentrotus_purpuratus.PhyloMap"
+
+```
+
+7) Document your new phylomap using `devtools::document()` or `roxygen2::roxygenise()`. Tada! The phylomap is documented such that users can run `?[Species].PhyloMap` and obtain the source and other information about the phylomap! Optionally, run `devtools::check()` to ensure that the package is looking good after the changes.
+
+8) Under the `Git` tab in Rstudio (where the other tabs include Environment, History, Connection, Buld, etc.), stage the changed files, commit the changes (with description) and push your changes to your fork. The staging, commit and push can alternatively be done on the command line. Then in GitHub, make a pull request.
+
+Done!
