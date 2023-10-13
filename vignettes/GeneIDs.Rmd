@@ -113,6 +113,8 @@ Tada! While the conversion issue between databases are mitigated, there are stil
 
 If the helper function `convertID()` in `phylomapr` doesn't work out well, there are other solutions involving fast and sensitive sequence alignment, though the sequences must be downloaded. To achieve this, `diamond_protein_to_protein_best_hits()` or `diamond_protein_to_protein_best_reciprocal_hits()` in `rdiamond` (or `diamond_best()` or `diamond_rec()` in `orthologr`) can be used. Here, we show the example with `rdiamond::diamond_protein_to_protein_best_hits()`.
 
+### Setting up the example
+
 To set up the example, we download the fasta sequences of each proteome using [`biomartr`](https://docs.ropensci.org/biomartr/).
 
 ```{r, message = FALSE, results='hide', warning = FALSE, eval=FALSE}
@@ -127,31 +129,75 @@ file_path.UNIPROT <- biomartr::getProteome(
   path     = file.path("_uniprot_downloads","proteomes") )
 ```
 
-#### Running sequence alignment
+#### Running solution for _C. elegans_
 
 Now run we run `rdiamond::diamond_protein_to_protein_best_hits()` to obtain the best hits
 
 ```{r, message = FALSE, results='hide', warning = FALSE, eval=FALSE}
+# obtain the best hit from ENSEMBL in the UNIPROT dataset
 best_rec_hits <- rdiamond::diamond_protein_to_protein_best_hits(
-  query = file_path.ENSEMBL, 
+  query = file_path.ENSEMBL,
   subject = file_path.UNIPROT,
   sensitivity_mode = "fast", # change to ultra-sensitive to increase time.
   cores = 8)
 
 # select only subject and query
 ENSEMBL_to_UNIPROT <- best_rec_hits %>% 
+  dplyr::filter(perc_identity == 100) %>% # filter hits with percent identity 100% (assuming no misalignments have occured)
   dplyr::select(1,2) %>%
   dplyr::rename(ensembl = 1) %>%
   dplyr::rename(GeneID = 2)
 
-# replace previous uniprot gene IDs with the new ensembl gene IDs
-Celegans.PhyloMap.ENSEMBL <- phylomapr::Caenorhabditis_elegans.PhyloMap %>%
-  dplyr::left_join(ENSEMBL_to_UNIPROT) %>%
-  tidyr::drop_na()
+# replace previous UNIPROT IDs with the new ENSEMBL IDs
+Celegans.PhyloMap.UNIPROT <- phylomapr::Caenorhabditis_elegans.PhyloMap
 
-Celegans.PhyloMap.ENSEMBL <- Celegans.PhyloMap.ENSEMBL %>%
-  dplyr::select(-GeneID) %>%
-  dplyr::rename(GeneID = ensembl)
+Celegans.PhyloMap.ENSEMBL <- Celegans.PhyloMap.UNIPROT %>%
+  dplyr::left_join(ENSEMBL_to_UNIPROT) %>% # join the ENSEMBL IDs to UNIPROT PhyloMap 
+  tidyr::drop_na() %>% # remove rows that do not have corresponding IDs
+  dplyr::select(-GeneID) %>% # remove the previous UNIPROT IDs
+  dplyr::rename(GeneID = ensembl) # rename the ensembl column as the GeneID
 ```
 
-Tada!
+Tada! Previously, the phylomap had UNIPROT IDs, i.e.
+
+```R
+> Celegans.PhyloMap.UNIPROT
+# A tibble: 19,818 × 2
+   Phylostratum GeneID                   
+          <dbl> <chr>                    
+ 1            2 sp|A0A061ACU2|PIEZ1_CAEEL
+ 2            3 sp|A0A078BQN7|FKH3_CAEEL 
+ 3            1 sp|A0A078BQP2|GCY25_CAEEL
+ 4           10 sp|A0A0K3AUE4|SEA2_CAEEL 
+ 5            1 sp|A0A0K3AUJ9|PRDX_CAEEL 
+ 6            1 sp|A0A0K3AV08|MLK1_CAEEL 
+ 7            1 sp|A0A0K3AWM6|MOM5_CAEEL 
+ 8            3 sp|A0A0K3AXH1|ARID1_CAEEL
+ 9            1 sp|A0A131MBU3|IRG7_CAEEL 
+10            1 sp|A0A131MCZ8|CNNM3_CAEEL
+# ℹ 19,808 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+
+Now, we have ENSEMBL gene IDs.
+
+```R
+> Celegans.PhyloMap.ENSEMBL
+# A tibble: 26,425 × 2
+   Phylostratum GeneID      
+          <dbl> <chr>       
+ 1            2 C10C5.1g.1  
+ 2            2 C10C5.1i.1  
+ 3            2 C10C5.1k.1  
+ 4            2 C10C5.1l.1  
+ 5            1 Y105C5B.2a.1
+ 6           10 K10G6.3a.1  
+ 7           10 K10G6.3c.1  
+ 8           10 K10G6.3e.1  
+ 9           10 K10G6.3f.1  
+10           10 K10G6.3g.1  
+# ℹ 26,415 more rows
+# ℹ Use `print(n = ...)` to see more rows
+```
+
+The main issue with solution 2 is the increased number of dependencies, including the sequence aligner `DIAMOND`, though one can imagine that other aligners could be used such as `MMSeqs2` or `BLAST`. The most important thing here is that the corresponding IDs can be obtained and that users cite the package/software that has been used.
