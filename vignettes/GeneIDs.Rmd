@@ -118,12 +118,12 @@ To set up the example, we download the fasta sequences of each proteome using [`
 ```{r, message = FALSE, results='hide', warning = FALSE, eval=FALSE}
 file_path.ENSEMBL <- biomartr::getProteome(
   db       = "ensembl",
-  organism = "Danio rerio",
+  organism = "Caenorhabditis elegans",
   path     = file.path("_ensembl_downloads","proteomes") )
 
-file_path.REFSEQ <- biomartr::getProteome(
-  db       = "refseq",
-  organism = "Danio rerio",
+file_path.UNIPROT <- biomartr::getProteome(
+  db       = "uniprot",
+  organism = "Caenorhabditis elegans",
   path     = file.path("_uniprot_downloads","proteomes") )
 ```
 
@@ -134,10 +134,24 @@ Now run we run `rdiamond::diamond_protein_to_protein_best_hits()` to obtain the 
 ```{r, message = FALSE, results='hide', warning = FALSE, eval=FALSE}
 best_rec_hits <- rdiamond::diamond_protein_to_protein_best_hits(
   query = file_path.ENSEMBL, 
-  subject = file_path.REFSEQ,
+  subject = file_path.UNIPROT,
+  sensitivity_mode = "fast", # change to ultra-sensitive to increase time.
   cores = 8)
+
+# select only subject and query
+ENSEMBL_to_UNIPROT <- best_rec_hits %>% 
+  dplyr::select(1,2) %>%
+  dplyr::rename(ensembl = 1) %>%
+  dplyr::rename(GeneID = 2)
+
+# replace previous uniprot gene IDs with the new ensembl gene IDs
+Celegans.PhyloMap.ENSEMBL <- phylomapr::Caenorhabditis_elegans.PhyloMap %>%
+  dplyr::left_join(ENSEMBL_to_UNIPROT) %>%
+  tidyr::drop_na()
+
+Celegans.PhyloMap.ENSEMBL <- Celegans.PhyloMap.ENSEMBL %>%
+  dplyr::select(-GeneID) %>%
+  dplyr::rename(GeneID = ensembl)
 ```
 
-```{r, message = FALSE, results='hide', warning = FALSE, eval=FALSE}
-
-```
+Tada!
