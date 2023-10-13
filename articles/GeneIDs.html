@@ -211,6 +211,9 @@ must be downloaded. To achieve this,
 <code>diamond_rec()</code> in <code>orthologr</code>) can be used. Here,
 we show the example with
 <code>rdiamond::diamond_protein_to_protein_best_hits()</code>.</p>
+<div class="section level3">
+<h3 id="setting-up-the-example">Setting up the example<a class="anchor" aria-label="anchor" href="#setting-up-the-example"></a>
+</h3>
 <p>To set up the example, we download the fasta sequences of each
 proteome using <a href="https://docs.ropensci.org/biomartr/" class="external-link"><code>biomartr</code></a>.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -224,33 +227,75 @@ proteome using <a href="https://docs.ropensci.org/biomartr/" class="external-lin
 <span>  organism <span class="op">=</span> <span class="st">"Caenorhabditis elegans"</span>,</span>
 <span>  path     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"_uniprot_downloads"</span>,<span class="st">"proteomes"</span><span class="op">)</span> <span class="op">)</span></span></code></pre></div>
 <div class="section level4">
-<h4 id="running-sequence-alignment">Running sequence alignment<a class="anchor" aria-label="anchor" href="#running-sequence-alignment"></a>
+<h4 id="running-solution-for-c--elegans">Running solution for <em>C. elegans</em><a class="anchor" aria-label="anchor" href="#running-solution-for-c--elegans"></a>
 </h4>
 <p>Now run we run
 <code>rdiamond::diamond_protein_to_protein_best_hits()</code> to obtain
 the best hits</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">best_rec_hits</span> <span class="op">&lt;-</span> <span class="fu">rdiamond</span><span class="fu">::</span><span class="fu">diamond_protein_to_protein_best_hits</span><span class="op">(</span></span>
-<span>  query <span class="op">=</span> <span class="va">file_path.ENSEMBL</span>, </span>
+<code class="sourceCode R"><span><span class="co"># obtain the best hit from ENSEMBL in the UNIPROT dataset</span></span>
+<span><span class="va">best_rec_hits</span> <span class="op">&lt;-</span> <span class="fu">rdiamond</span><span class="fu">::</span><span class="fu">diamond_protein_to_protein_best_hits</span><span class="op">(</span></span>
+<span>  query <span class="op">=</span> <span class="va">file_path.ENSEMBL</span>,</span>
 <span>  subject <span class="op">=</span> <span class="va">file_path.UNIPROT</span>,</span>
 <span>  sensitivity_mode <span class="op">=</span> <span class="st">"fast"</span>, <span class="co"># change to ultra-sensitive to increase time.</span></span>
 <span>  cores <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># select only subject and query</span></span>
 <span><span class="va">ENSEMBL_to_UNIPROT</span> <span class="op">&lt;-</span> <span class="va">best_rec_hits</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">perc_identity</span> <span class="op">==</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># filter hits with percent identity 100% (assuming no misalignments have occured)</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>ensembl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>GeneID <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># replace previous uniprot gene IDs with the new ensembl gene IDs</span></span>
-<span><span class="va">Celegans.PhyloMap.ENSEMBL</span> <span class="op">&lt;-</span> <span class="fu">phylomapr</span><span class="fu">::</span><span class="va"><a href="../reference/Caenorhabditis_elegans.PhyloMap.html">Caenorhabditis_elegans.PhyloMap</a></span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">ENSEMBL_to_UNIPROT</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># replace previous UNIPROT IDs with the new ENSEMBL IDs</span></span>
+<span><span class="va">Celegans.PhyloMap.UNIPROT</span> <span class="op">&lt;-</span> <span class="fu">phylomapr</span><span class="fu">::</span><span class="va"><a href="../reference/Caenorhabditis_elegans.PhyloMap.html">Caenorhabditis_elegans.PhyloMap</a></span></span>
 <span></span>
-<span><span class="va">Celegans.PhyloMap.ENSEMBL</span> <span class="op">&lt;-</span> <span class="va">Celegans.PhyloMap.ENSEMBL</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">GeneID</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>GeneID <span class="op">=</span> <span class="va">ensembl</span><span class="op">)</span></span></code></pre></div>
-<p>Tada!</p>
+<span><span class="va">Celegans.PhyloMap.ENSEMBL</span> <span class="op">&lt;-</span> <span class="va">Celegans.PhyloMap.UNIPROT</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">ENSEMBL_to_UNIPROT</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># join the ENSEMBL IDs to UNIPROT PhyloMap </span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># remove rows that do not have corresponding IDs</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">GeneID</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># remove the previous UNIPROT IDs</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>GeneID <span class="op">=</span> <span class="va">ensembl</span><span class="op">)</span> <span class="co"># rename the ensembl column as the GeneID</span></span></code></pre></div>
+<p>Tada! Previously, the phylomap had UNIPROT IDs, i.e.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Celegans.PhyloMap.UNIPROT</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 19,818 × 2</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>   Phylostratum GeneID                   </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                    </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>            <span class="dv">2</span> sp<span class="sc">|</span>A0A061ACU2<span class="sc">|</span>PIEZ1_CAEEL</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>            <span class="dv">3</span> sp<span class="sc">|</span>A0A078BQN7<span class="sc">|</span>FKH3_CAEEL </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A078BQP2<span class="sc">|</span>GCY25_CAEEL</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>           <span class="dv">10</span> sp<span class="sc">|</span>A0A0K3AUE4<span class="sc">|</span>SEA2_CAEEL </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AUJ9<span class="sc">|</span>PRDX_CAEEL </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AV08<span class="sc">|</span>MLK1_CAEEL </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A0K3AWM6<span class="sc">|</span>MOM5_CAEEL </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>            <span class="dv">3</span> sp<span class="sc">|</span>A0A0K3AXH1<span class="sc">|</span>ARID1_CAEEL</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A131MBU3<span class="sc">|</span>IRG7_CAEEL </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>            <span class="dv">1</span> sp<span class="sc">|</span>A0A131MCZ8<span class="sc">|</span>CNNM3_CAEEL</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 19,808 more rows</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<p>Now, we have ENSEMBL gene IDs.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Celegans.PhyloMap.ENSEMBL</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 26,425 × 2</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>   Phylostratum GeneID      </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>          <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>            <span class="dv">2</span> C10C5<span class="fl">.1</span>g<span class="fl">.1</span>  </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>            <span class="dv">2</span> C10C5<span class="fl">.1</span>i<span class="fl">.1</span>  </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>            <span class="dv">2</span> C10C5<span class="fl">.1</span>k<span class="fl">.1</span>  </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>            <span class="dv">2</span> C10C5<span class="fl">.1</span>l<span class="fl">.1</span>  </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>            <span class="dv">1</span> Y105C5B<span class="fl">.2</span>a<span class="fl">.1</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>           <span class="dv">10</span> K10G6<span class="fl">.3</span>a<span class="fl">.1</span>  </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>           <span class="dv">10</span> K10G6<span class="fl">.3</span>c<span class="fl">.1</span>  </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>           <span class="dv">10</span> K10G6<span class="fl">.3</span>e<span class="fl">.1</span>  </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>           <span class="dv">10</span> K10G6<span class="fl">.3</span>f<span class="fl">.1</span>  </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>           <span class="dv">10</span> K10G6<span class="fl">.3</span>g<span class="fl">.1</span>  </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 26,415 more rows</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<p>The main issue with solution 2 is the increased number of
+dependencies, including the sequence aligner <code>DIAMOND</code>,
+though one can imagine that other aligners could be used such as
+<code>MMSeqs2</code> or <code>BLAST</code>. The most important thing
+here is that the corresponding IDs can be obtained and that users cite
+the package/software that has been used.</p>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
