@@ -74,7 +74,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Gene names in different databases</h1>
             
-            <h4 data-toc-skip class="date">2023-10-11</h4>
+            <h4 data-toc-skip class="date">2023-10-13</h4>
       
       
       <div class="d-none name"><code>GeneIDs.Rmd</code></div>
@@ -92,7 +92,7 @@ quantification has been performed on genes from another database
 (e.g. ENSEMBL).</p>
 </div>
 <div class="section level2">
-<h2 id="solution">Solution<a class="anchor" aria-label="anchor" href="#solution"></a>
+<h2 id="solution-1">Solution 1<a class="anchor" aria-label="anchor" href="#solution-1"></a>
 </h2>
 <p>In <code>phylomapr</code>, we try to mitigate this issue using the
 helper function <code><a href="../reference/convertID.html">convertID()</a></code>, which essentially wraps around
@@ -197,6 +197,61 @@ there are still some aspects to be improved. For example, we can see a
 drop in the number of genes in the phylomap. Furthermore, a bit of
 fidgeting with <code>biomartr</code> is needed. However, this should
 still be faster than running gene age inference from scratch!</p>
+</div>
+<div class="section level2">
+<h2 id="solution-2">Solution 2<a class="anchor" aria-label="anchor" href="#solution-2"></a>
+</h2>
+<p>If the helper function <code><a href="../reference/convertID.html">convertID()</a></code> in
+<code>phylomapr</code> doesn’t work out well, there are other solutions
+involving fast and sensitive sequence alignment, though the sequences
+must be downloaded. To achieve this,
+<code>diamond_protein_to_protein_best_hits()</code> or
+<code>diamond_protein_to_protein_best_reciprocal_hits()</code> in
+<code>rdiamond</code> (or <code>diamond_best()</code> or
+<code>diamond_rec()</code> in <code>orthologr</code>) can be used. Here,
+we show the example with
+<code>rdiamond::diamond_protein_to_protein_best_hits()</code>.</p>
+<p>To set up the example, we download the fasta sequences of each
+proteome using <a href="https://docs.ropensci.org/biomartr/" class="external-link"><code>biomartr</code></a>.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">file_path.ENSEMBL</span> <span class="op">&lt;-</span> <span class="fu">biomartr</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/biomartr/reference/getProteome.html" class="external-link">getProteome</a></span><span class="op">(</span></span>
+<span>  db       <span class="op">=</span> <span class="st">"ensembl"</span>,</span>
+<span>  organism <span class="op">=</span> <span class="st">"Caenorhabditis elegans"</span>,</span>
+<span>  path     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"_ensembl_downloads"</span>,<span class="st">"proteomes"</span><span class="op">)</span> <span class="op">)</span></span>
+<span></span>
+<span><span class="va">file_path.UNIPROT</span> <span class="op">&lt;-</span> <span class="fu">biomartr</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/biomartr/reference/getProteome.html" class="external-link">getProteome</a></span><span class="op">(</span></span>
+<span>  db       <span class="op">=</span> <span class="st">"uniprot"</span>,</span>
+<span>  organism <span class="op">=</span> <span class="st">"Caenorhabditis elegans"</span>,</span>
+<span>  path     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"_uniprot_downloads"</span>,<span class="st">"proteomes"</span><span class="op">)</span> <span class="op">)</span></span></code></pre></div>
+<div class="section level4">
+<h4 id="running-sequence-alignment">Running sequence alignment<a class="anchor" aria-label="anchor" href="#running-sequence-alignment"></a>
+</h4>
+<p>Now run we run
+<code>rdiamond::diamond_protein_to_protein_best_hits()</code> to obtain
+the best hits</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">best_rec_hits</span> <span class="op">&lt;-</span> <span class="fu">rdiamond</span><span class="fu">::</span><span class="fu">diamond_protein_to_protein_best_hits</span><span class="op">(</span></span>
+<span>  query <span class="op">=</span> <span class="va">file_path.ENSEMBL</span>, </span>
+<span>  subject <span class="op">=</span> <span class="va">file_path.UNIPROT</span>,</span>
+<span>  sensitivity_mode <span class="op">=</span> <span class="st">"fast"</span>, <span class="co"># change to ultra-sensitive to increase time.</span></span>
+<span>  cores <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># select only subject and query</span></span>
+<span><span class="va">ENSEMBL_to_UNIPROT</span> <span class="op">&lt;-</span> <span class="va">best_rec_hits</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>ensembl <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>GeneID <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># replace previous uniprot gene IDs with the new ensembl gene IDs</span></span>
+<span><span class="va">Celegans.PhyloMap.ENSEMBL</span> <span class="op">&lt;-</span> <span class="fu">phylomapr</span><span class="fu">::</span><span class="va"><a href="../reference/Caenorhabditis_elegans.PhyloMap.html">Caenorhabditis_elegans.PhyloMap</a></span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">ENSEMBL_to_UNIPROT</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html" class="external-link">drop_na</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Celegans.PhyloMap.ENSEMBL</span> <span class="op">&lt;-</span> <span class="va">Celegans.PhyloMap.ENSEMBL</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">GeneID</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>GeneID <span class="op">=</span> <span class="va">ensembl</span><span class="op">)</span></span></code></pre></div>
+<p>Tada!</p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
