@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 
 The GeneID labels differ across databases. This is a potential problem when gene age inference has been performed from protein sequences obtained from one database (e.g. UniProtKB) and the RNA-seq quantification has been performed on genes from another database (e.g. ENSEMBL).
 
-## Solution
+## Solution 1
 
 In `phylomapr`, we try to mitigate this issue using the helper function `convertID()`, which essentially wraps around the function `biomart()` in the [`biomartr`](https://docs.ropensci.org/biomartr/) package. In this article, we give an example of how _C. elegans_ phylomaps can be converted from the uniprot format to the wormbase format.
 
@@ -108,3 +108,36 @@ Celegans.PhyloMap.wormbase <-
 ```
 
 Tada! While the conversion issue between databases are mitigated, there are still some aspects to be improved. For example, we can see a drop in the number of genes in the phylomap. Furthermore, a bit of fidgeting with `biomartr` is needed. However, this should still be faster than running gene age inference from scratch!
+
+## Solution 2
+
+If the helper function `convertID()` in `phylomapr` doesn't work out well, there are other solutions involving fast and sensitive sequence alignment, though the sequences must be downloaded. To achieve this, `diamond_protein_to_protein_best_hits()` or `diamond_protein_to_protein_best_reciprocal_hits()` in `rdiamond` (or `diamond_best()` or `diamond_rec()` in `orthologr`) can be used. Here, we show the example with `rdiamond::diamond_protein_to_protein_best_hits()`.
+
+To set up the example, we download the fasta sequences of each proteome using [`biomartr`](https://docs.ropensci.org/biomartr/).
+
+```{r, message = FALSE, results='hide', warning = FALSE, eval=FALSE}
+file_path.ENSEMBL <- biomartr::getProteome(
+  db       = "ensembl",
+  organism = "Danio rerio",
+  path     = file.path("_ensembl_downloads","proteomes") )
+
+file_path.REFSEQ <- biomartr::getProteome(
+  db       = "refseq",
+  organism = "Danio rerio",
+  path     = file.path("_uniprot_downloads","proteomes") )
+```
+
+#### Running sequence alignment
+
+Now run we run `rdiamond::diamond_protein_to_protein_best_hits()` to obtain the best hits
+
+```{r, message = FALSE, results='hide', warning = FALSE, eval=FALSE}
+best_rec_hits <- rdiamond::diamond_protein_to_protein_best_hits(
+  query = file_path.ENSEMBL, 
+  subject = file_path.REFSEQ,
+  cores = 8)
+```
+
+```{r, message = FALSE, results='hide', warning = FALSE, eval=FALSE}
+
+```
