@@ -1,5 +1,4 @@
 # phylomapr <img src="man/figures/logo.png" align="right" height="174" width="150" />
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FLotharukpongJS%2Fphylomapr&label=Visitors&countColor=%23263759&style=flat)
 
 Gene founder events facilitate evolutionary innovations. `phylomapr` enables quick retrieval of precomputed gene age maps (phylomaps) in R. Gene age maps loaded from `phylomapr` integrate _seamlessly_ with [`myTAI`](https://github.com/drostlab/myTAI).
