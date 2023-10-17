@@ -92,7 +92,7 @@ convertID <- function(
     )
 
   if(nrow(result_BM) == 0){
-    stop("Something went wrong when trying to run biomartr::biomart(). \nThe search returned no results, please check your input data", call. = FALSE)
+    stop("Something went wrong when trying to run biomartr::biomart(). \nThe search returned no results, please check your input data, particularly the IDs used for the biomartr::biomart() search.", call. = FALSE)
   }
 
   converted_phylomap <-
