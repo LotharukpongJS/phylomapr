@@ -470,6 +470,336 @@ Strongylocentrotus_purpuratus.PhyloMap <-
     GeneID = `#gene`
     )
 
+######### Strongylocentrotus purpuratus GenEra WHL22-transdecoder #########
+
+Strongylocentrotus_purpuratus_WHL22.data <-readr::read_tsv("data-raw/Strongylocentrotus_purpuratus_gene_ages.tsv")
+Strongylocentrotus_purpuratus_WHL22.PhyloMap <-
+  dplyr::select(
+    Strongylocentrotus_purpuratus_WHL22.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Schmidtea polychroa GenEra #########
+
+Schmidtea_polychroa.data <-readr::read_tsv("data-raw/Schmidtea_polychroa_gene_ages.tsv")
+Schmidtea_polychroa.PhyloMap <-
+  dplyr::select(
+    Schmidtea_polychroa.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Schizophyllum commune GenEra #########
+
+Schizophyllum_commune.data <-readr::read_tsv("data-raw/Schizophyllum_commune_gene_ages.tsv")
+Schizophyllum_commune.PhyloMap <-
+  dplyr::select(
+    Schizophyllum_commune.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Rickenella mellea GenEra #########
+
+Rickenella_mellea.data <-readr::read_tsv("data-raw/Rickenella_mellea_gene_ages.tsv")
+Rickenella_mellea.PhyloMap <-
+  dplyr::select(
+    Rickenella_mellea.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Rattus norvegicus GenEra #########
+
+Rattus_norvegicus.data <-readr::read_tsv("data-raw/Rattus_norvegicus_gene_ages.tsv")
+Rattus_norvegicus.PhyloMap <-
+  dplyr::select(
+    Rattus_norvegicus.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Pterula gracilis GenEra #########
+
+Pterula_gracilis.data <-readr::read_tsv("data-raw/Pterula_gracilis_gene_ages.tsv")
+Pterula_gracilis.PhyloMap <-
+  dplyr::select(
+    Pterula_gracilis.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Pleurotus ostreatus GenEra #########
+
+Pleurotus_ostreatus.data <-readr::read_tsv("data-raw/Pleurotus_ostreatus_gene_ages.tsv")
+Pleurotus_ostreatus.PhyloMap <-
+  dplyr::select(
+    Pleurotus_ostreatus.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Platynereis dumerilii GenEra #########
+
+Platynereis_dumerilii.data <-readr::read_tsv("data-raw/Platynereis_dumerilii_gene_ages.tsv")
+Platynereis_dumerilii.PhyloMap <-
+  dplyr::select(
+    Platynereis_dumerilii.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Phanerodontia chrysosporium GenEra #########
+
+Phanerodontia_chrysosporium.data <-readr::read_tsv("data-raw/Phanerodontia_chrysosporium_gene_ages.tsv")
+Phanerodontia_chrysosporium.PhyloMap <-
+  dplyr::select(
+    Phanerodontia_chrysosporium.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Oryctolagus cuniculus GenEra #########
+
+Oryctolagus_cuniculus.data <-readr::read_tsv("data-raw/Oryctolagus_cuniculus_gene_ages.tsv")
+Oryctolagus_cuniculus.PhyloMap <-
+  dplyr::select(
+    Oryctolagus_cuniculus.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Nematostella vectensis NvT1-transdecoder GenEra #########
+
+Nematostella_vectensis_NvT1.data <-readr::read_tsv("data-raw/Nematostella_vectensis_gene_ages.tsv")
+Nematostella_vectensis_NvT1.PhyloMap <-
+  dplyr::select(
+    Nematostella_vectensis_NvT1.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Mus musculus ENSEMBL GRC38mm10 GenEra #########
+
+Mus_musculus_ENSEMBL_GRC38mm10.data <-readr::read_tsv("data-raw/Mus_musculus_gene_ages.tsv")
+Mus_musculus_ENSEMBL_GRC38mm10.PhyloMap <-
+  dplyr::select(
+    Mus_musculus_ENSEMBL_GRC38mm10.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Monodelphis domestica GenEra #########
+
+Monodelphis_domestica.data <-readr::read_tsv("data-raw/Monodelphis_domestica_gene_ages.tsv")
+Monodelphis_domestica.PhyloMap <-
+  dplyr::select(
+    Monodelphis_domestica.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Macaca mulatta GenEra #########
+
+Macaca_mulatta.data <-readr::read_tsv("data-raw/Macaca_mulatta_gene_ages.tsv")
+Macaca_mulatta.PhyloMap <-
+  dplyr::select(
+    Macaca_mulatta.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Lentinus tigrinus GenEra #########
+
+Lentinus_tigrinus.data <-readr::read_tsv("data-raw/Lentinus_tigrinus_gene_ages.tsv")
+Lentinus_tigrinus.PhyloMap <-
+  dplyr::select(
+    Lentinus_tigrinus.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Hypsibius dujardini GenEra #########
+
+Hypsibius_dujardini.data <-readr::read_tsv("data-raw/Hypsibius_dujardini_gene_ages.tsv")
+Hypsibius_dujardini.PhyloMap <-
+  dplyr::select(
+    Hypsibius_dujardini.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Homo sapiens ENSEMBL GRCh37hg19 GenEra #########
+
+Homo_sapiens_ENSEMBL_GRCh37hg19.data <-readr::read_tsv("data-raw/Homo_sapiens_gene_ages.tsv")
+Homo_sapiens_ENSEMBL_GRCh37hg19.PhyloMap <-
+  dplyr::select(
+    Homo_sapiens_ENSEMBL_GRCh37hg19.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Gallus gallus GenEra #########
+
+Gallus_gallus.data <-readr::read_tsv("data-raw/Gallus_gallus_gene_ages.tsv")
+Gallus_gallus.PhyloMap <-
+  dplyr::select(
+    Gallus_gallus.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Drosophila melanogaster ENSEMBL BDGP5 GenEra #########
+
+Drosophila_melanogaster_ENSEMBL_BDGP5.data <-readr::read_tsv("data-raw/Drosophila_melanogaster_gene_ages.tsv")
+Drosophila_melanogaster_ENSEMBL_BDGP5.PhyloMap <-
+  dplyr::select(
+    Drosophila_melanogaster_ENSEMBL_BDGP5.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Danio rerio GenEra #########
+
+Danio_rerio.data <-readr::read_tsv("data-raw/Danio_rerio_gene_ages.tsv")
+Danio_rerio.PhyloMap <-
+  dplyr::select(
+    Danio_rerio.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Coprinopsis cinerea GenEra #########
+
+Coprinopsis_cinerea.data <-readr::read_tsv("data-raw/Coprinopsis_cinerea_gene_ages.tsv")
+Coprinopsis_cinerea.PhyloMap <-
+  dplyr::select(
+    Coprinopsis_cinerea.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Coprinopsis cinerea JGI Copci AmutBmut1 GenEra #########
+
+Coprinopsis_cinerea_JGI_Copci_AmutBmut1.data <-readr::read_tsv("data-raw/Coprinopsis_cinerea_gene_ages_ii.tsv")
+Coprinopsis_cinerea_JGI_Copci_AmutBmut1.PhyloMap <-
+  dplyr::select(
+    Coprinopsis_cinerea_JGI_Copci_AmutBmut1.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Caenorhabditis elegans WormBase WS230 GenEra #########
+
+Caenorhabditis_elegans_WormBase_WS230.data <-readr::read_tsv("data-raw/Caenorhabditis_elegans_gene_ages.tsv")
+Caenorhabditis_elegans_WormBase_WS230.PhyloMap <-
+  dplyr::select(
+    Caenorhabditis_elegans_WormBase_WS230.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Brassica rapa GenEra #########
+
+Brassica_rapa.data <-readr::read_tsv("data-raw/Brassica_rapa_gene_ages.tsv")
+Brassica_rapa.PhyloMap <-
+  dplyr::select(
+    Brassica_rapa.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Brassica oleracea GenEra #########
+
+Brassica_oleracea.data <-readr::read_tsv("data-raw/Brassica_oleracea_gene_ages.tsv")
+Brassica_oleracea.PhyloMap <-
+  dplyr::select(
+    Brassica_oleracea.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Brassica nigra GenEra #########
+
+Brassica_nigra.data <-readr::read_tsv("data-raw/Brassica_nigra_gene_ages.tsv")
+Brassica_nigra.PhyloMap <-
+  dplyr::select(
+    Brassica_nigra.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Brassica napus GenEra #########
+
+Brassica_napus.data <-readr::read_tsv("data-raw/Brassica_napus_gene_ages.tsv")
+Brassica_napus.PhyloMap <-
+  dplyr::select(
+    Brassica_napus.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Brassica juncea GenEra #########
+
+Brassica_juncea.data <-readr::read_tsv("data-raw/Brassica_juncea_gene_ages.tsv")
+Brassica_juncea.PhyloMap <-
+  dplyr::select(
+    Brassica_juncea.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Borreliella burgdorferi GenEra #########
+
+Borreliella_burgdorferi.data <-readr::read_tsv("data-raw/Borreliella_burgdorferi_gene_ages.tsv")
+Borreliella_burgdorferi.PhyloMap <-
+  dplyr::select(
+    Borreliella_burgdorferi.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Bacillus subtilis GenEra #########
+
+Bacillus_subtilis.data <-readr::read_tsv("data-raw/Bacillus_subtilis_gene_ages.tsv")
+Bacillus_subtilis.PhyloMap <-
+  dplyr::select(
+    Bacillus_subtilis.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Auriculariopsis ampla GenEra #########
+
+Auriculariopsis_ampla.data <-readr::read_tsv("data-raw/Auriculariopsis_ampla_gene_ages.tsv")
+Auriculariopsis_ampla.PhyloMap <-
+  dplyr::select(
+    Auriculariopsis_ampla.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Armillaria ostoyae GenEra #########
+
+Armillaria_ostoyae.data <-readr::read_tsv("data-raw/Armillaria_ostoyae_gene_ages.tsv")
+Armillaria_ostoyae.PhyloMap <-
+  dplyr::select(
+    Armillaria_ostoyae.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
+######### Amphimedon queenslandica ENSEMBL Aqu2.1 GenEra #########
+
+Amphimedon_queenslandica_ENSEMBL_Aqu2.1.data <-readr::read_tsv("data-raw/Amphimedon_queenslandica_gene_ages.tsv")
+Amphimedon_queenslandica_ENSEMBL_Aqu2.1.PhyloMap <-
+  dplyr::select(
+    Amphimedon_queenslandica_ENSEMBL_Aqu2.1.data,
+    Phylostratum = rank,
+    GeneID = `#gene`
+  )
+
 ######### Save phylomaps #########
 
 usethis::use_data(Agaricus_bisporus.PhyloMap, overwrite = TRUE)
@@ -513,3 +843,37 @@ usethis::use_data(Radiomyces_spectabilis.PhyloMap, overwrite = TRUE)
 
 usethis::use_data(Homo_sapiens.PhyloMap, overwrite = TRUE)
 usethis::use_data(Strongylocentrotus_purpuratus.PhyloMap, overwrite = TRUE)
+
+usethis::use_data(Strongylocentrotus_purpuratus_WHL22.PhyloMap, overwrite = TRUE)
+usethis::use_data(Schmidtea_polychroa.PhyloMap, overwrite = TRUE)
+usethis::use_data(Schizophyllum_commune.PhyloMap, overwrite = TRUE)
+usethis::use_data(Rickenella_mellea.PhyloMap, overwrite = TRUE)
+usethis::use_data(Rattus_norvegicus.PhyloMap, overwrite = TRUE)
+usethis::use_data(Pterula_gracilis.PhyloMap, overwrite = TRUE)
+usethis::use_data(Pleurotus_ostreatus.PhyloMap, overwrite = TRUE)
+usethis::use_data(Platynereis_dumerilii.PhyloMap, overwrite = TRUE)
+usethis::use_data(Phanerodontia_chrysosporium.PhyloMap, overwrite = TRUE)
+usethis::use_data(Oryctolagus_cuniculus.PhyloMap, overwrite = TRUE)
+usethis::use_data(Nematostella_vectensis_NvT1.PhyloMap, overwrite = TRUE)
+usethis::use_data(Mus_musculus_ENSEMBL_GRC38mm10.PhyloMap, overwrite = TRUE)
+usethis::use_data(Monodelphis_domestica.PhyloMap, overwrite = TRUE)
+usethis::use_data(Macaca_mulatta.PhyloMap, overwrite = TRUE)
+usethis::use_data(Lentinus_tigrinus.PhyloMap, overwrite = TRUE)
+usethis::use_data(Hypsibius_dujardini.PhyloMap, overwrite = TRUE)
+usethis::use_data(Homo_sapiens_ENSEMBL_GRCh37hg19.PhyloMap, overwrite = TRUE)
+usethis::use_data(Gallus_gallus.PhyloMap, overwrite = TRUE)
+usethis::use_data(Drosophila_melanogaster_ENSEMBL_BDGP5.PhyloMap, overwrite = TRUE)
+usethis::use_data(Danio_rerio.PhyloMap, overwrite = TRUE)
+usethis::use_data(Coprinopsis_cinerea.PhyloMap, overwrite = TRUE)
+usethis::use_data(Coprinopsis_cinerea_JGI_Copci_AmutBmut1.PhyloMap, overwrite = TRUE)
+usethis::use_data(Caenorhabditis_elegans_WormBase_WS230.PhyloMap, overwrite = TRUE)
+usethis::use_data(Brassica_rapa.PhyloMap, overwrite = TRUE)
+usethis::use_data(Brassica_oleracea.PhyloMap, overwrite = TRUE)
+usethis::use_data(Brassica_nigra.PhyloMap, overwrite = TRUE)
+usethis::use_data(Brassica_napus.PhyloMap, overwrite = TRUE)
+usethis::use_data(Brassica_juncea.PhyloMap, overwrite = TRUE)
+usethis::use_data(Borreliella_burgdorferi.PhyloMap, overwrite = TRUE)
+usethis::use_data(Bacillus_subtilis.PhyloMap, overwrite = TRUE)
+usethis::use_data(Auriculariopsis_ampla.PhyloMap, overwrite = TRUE)
+usethis::use_data(Armillaria_ostoyae.PhyloMap, overwrite = TRUE)
+usethis::use_data(Amphimedon_queenslandica_ENSEMBL_Aqu2.1.PhyloMap, overwrite = TRUE)
