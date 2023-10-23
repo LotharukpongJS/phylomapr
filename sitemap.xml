@@ -34,25 +34,67 @@
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Amphimedon_queenslandica.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Amphimedon_queenslandica_ENSEMBL_Aqu2.1.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Apostichopus_japonicus.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Arabidopsis_thaliana.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Armillaria_ostoyae.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Aspergillus_niger_CBS_513.88.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Auriculariopsis_ampla.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Bacillus_subtilis.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Batrachochytrium_dendrobatidis_JAM81.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Borreliella_burgdorferi.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Brassica_juncea.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Brassica_napus.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Brassica_nigra.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Brassica_oleracea.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Brassica_rapa.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Caenorhabditis_elegans.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Caenorhabditis_elegans_WormBase_WS230.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Capitella_teleta.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Coprinopsis_cinerea.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Coprinopsis_cinerea_JGI_Copci_AmutBmut1.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Cryptococcus_neoformans_var.neoformans_JEC21.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Danio_rerio.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Dissophora_decumbens.PhyloMap.html</loc>
@@ -61,7 +103,13 @@
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Drosophila_melanogaster.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Drosophila_melanogaster_ENSEMBL_BDGP5.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Echinococcus_granulosus.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Gallus_gallus.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Geosiphon_pyriformis.PhyloMap.html</loc>
@@ -76,10 +124,25 @@
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Homo_sapiens.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Homo_sapiens_ENSEMBL_GRCh37hg19.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Hypsibius_dujardini.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Kwoniella_mangroviensis.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Lentinus_tigrinus.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Macaca_mulatta.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Marchantia_polymorpha.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Monodelphis_domestica.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Morchella_conica.PhyloMap.html</loc>
@@ -94,16 +157,28 @@
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Mus_musculus.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Mus_musculus_ENSEMBL_GRC38mm10.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Musa_acuminata.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Nematostella_vectensis.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Nematostella_vectensis_NvT1.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Octopus_vulgaris.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Oryctolagus_cuniculus.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Oryza_sativa.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Phanerodontia_chrysosporium.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Phycomyces_blakesleeanus.PhyloMap.html</loc>
@@ -115,16 +190,37 @@
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Picea_glauca.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Platynereis_dumerilii.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Pleurotus_ostreatus.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Pterula_gracilis.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Radiomyces_spectabilis.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Rattus_norvegicus.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Rhizophagus_irregularis.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Rickenella_mellea.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Saccharomyces_cerevisiae_S288C.PhyloMap.html</loc>
   </url>
   <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Schizophyllum_commune.PhyloMap.html</loc>
+  </url>
+  <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Schizosaccharomyces_pombe.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Schmidtea_polychroa.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Selaginella_moellendorffii.PhyloMap.html</loc>
@@ -134,6 +230,9 @@
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Strongylocentrotus_purpuratus.PhyloMap.html</loc>
+  </url>
+  <url>
+    <loc>https://lotharukpongjs.github.io/phylomapr/reference/Strongylocentrotus_purpuratus_WHL22.PhyloMap.html</loc>
   </url>
   <url>
     <loc>https://lotharukpongjs.github.io/phylomapr/reference/Tremella_mesenterica.PhyloMap.html</loc>
