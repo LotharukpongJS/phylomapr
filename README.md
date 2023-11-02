@@ -2,6 +2,7 @@
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FLotharukpongJS%2Fphylomapr&label=Visitors&countColor=%23263759&style=flat)
 
 Gene founder events facilitate evolutionary innovations. `phylomapr` enables quick retrieval of precomputed gene age maps (phylomaps) in R. Gene age maps loaded from `phylomapr` integrate _seamlessly_ with [`myTAI`](https://github.com/drostlab/myTAI).
+Furthermore, [carbon footprint of computational work is on the rise](https://www.ebi.ac.uk/about/news/perspectives/greener-principles/). This package helps alleviate that for gene age inference.
 
 ## Installation
 ```r
